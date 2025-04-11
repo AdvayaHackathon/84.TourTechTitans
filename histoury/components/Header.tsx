@@ -41,9 +41,12 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center">
-            <button className="bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded transition duration-300">
+            <Link
+              href="/login"
+              className="bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded transition duration-300"
+            >
               Sign In
-            </button>
+            </Link>
           </div>
 
           <div className="md:hidden flex items-center">
