@@ -292,7 +292,7 @@ const SearchBar = () => {
           ref={inputRef}
           type="text"
           placeholder="Search for historical sites by name..."
-          className="w-full p-4 pl-12 rounded-full border-2 border-amber-300 focus:border-amber-500 focus:outline-none shadow-md transition-all duration-200"
+          className="w-full p-4 pl-12 rounded-full border-2 text-black border-black focus:border-black focus:outline-none shadow-md transition-all duration-200"
           value={searchTerm}
           onChange={handleInputChange}
           onClick={() => setShowResults(true)}
