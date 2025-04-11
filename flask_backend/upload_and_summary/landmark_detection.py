@@ -55,8 +55,7 @@ class SimpleCNN(nn.Module):
         return self.classifier(x)
 
 # CNN inference
-def predict_landmark_custom_model(image_path, model_path="final_detector.pt", class_dir="Tourist-thang/dataset/images/train"):
-    CLASS_NAMES = sorted(os.listdir(class_dir))
+def predict_landmark_custom_model(image_path, model_path="84.TourTechTitans/final_detector.pt"):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
     class_mapping = {
@@ -86,7 +85,9 @@ def predict_landmark_custom_model(image_path, model_path="final_detector.pt", cl
         "victoria memorial":("Victoria Memorial", 22.5448, 88.3426)
     }
 
-    model = SimpleCNN(len(CLASS_NAMES)).to(device)
+    CLASS_NAMES = class_mapping.keys()
+
+    model = SimpleCNN(24).to(device)
     model.load_state_dict(torch.load(model_path, map_location=device))
     model.eval()
 
