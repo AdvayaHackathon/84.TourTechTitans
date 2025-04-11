@@ -34,3 +34,26 @@ body {
 /* body {
   top: 0 !important;
 } */
+
+#google_translate_element {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1000;
+  transform: scale(0.7);
+  /* Further reduce size */
+  /* Reduce size */
+  transform-origin: bottom left;
+  background-color: rgba(255, 255, 255, 0.8);
+  /* Optional: Add a background */
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  #google_translate_element {
+    transform: scale(0.6);
+    /* Further reduce size on smaller screens */
+  }
+}
