@@ -55,3 +55,4 @@ async def generate_map(lat: float, lng: float):
     map_path = f"{UPLOAD_FOLDER}/leaflet_map.html"
     map_.save(map_path)
     return FileResponse(map_path) 
+

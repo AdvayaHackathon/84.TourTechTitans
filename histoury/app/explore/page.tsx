@@ -57,7 +57,9 @@ const SiteCard: React.FC<SiteCardProps> = ({
             </svg>
             <span className="text-sm">{location}</span>
           </div>
-          <p className="text-amber-700 mb-3 text-sm line-clamp-2">{description}</p>
+          <p className="text-amber-700 mb-3 text-sm line-clamp-2">
+            {description}
+          </p>
           <div className="text-amber-600 hover:text-amber-800 font-medium text-sm">
             Explore More →
           </div>
@@ -72,53 +74,61 @@ const SuggestedSection = () => {
     {
       name: "Ajanta Caves",
       location: "Aurangabad, Maharashtra",
-      description: "Buddhist rock-cut cave monuments with paintings and sculptures dating from the 2nd century BCE.",
-      imageSrc: "/images/ajanta_caves.jpg",
-      slug: "ajanta-caves"
+      description:
+        "Buddhist rock-cut cave monuments with paintings and sculptures dating from the 2nd century BCE.",
+      imageSrc: "@/public/images/ajanta-caves-1.jpeg",
+      slug: "ajanta-caves",
     },
     {
       name: "Ellora Caves",
       location: "Aurangabad, Maharashtra",
-      description: "Remarkable cave temples featuring Buddhist, Hindu, and Jain monuments carved from a single rock face.",
+      description:
+        "Remarkable cave temples featuring Buddhist, Hindu, and Jain monuments carved from a single rock face.",
       imageSrc: "/images/ellora_caves.jpg",
-      slug: "ellora-caves"
+      slug: "ellora-caves",
     },
     {
       name: "Hawa Mahal",
       location: "Jaipur, Rajasthan",
-      description: "The 'Palace of Winds' with its unique honeycomb facade featuring 953 small windows.",
+      description:
+        "The 'Palace of Winds' with its unique honeycomb facade featuring 953 small windows.",
       imageSrc: "/images/hawa_mahal.jpg",
-      slug: "hawa-mahal"
+      slug: "hawa-mahal",
     },
     {
       name: "Gateway of India",
       location: "Mumbai, Maharashtra",
-      description: "Iconic monument built to commemorate the visit of King George V and Queen Mary to Mumbai.",
+      description:
+        "Iconic monument built to commemorate the visit of King George V and Queen Mary to Mumbai.",
       imageSrc: "/images/gateway_of_india.jpg",
-      slug: "gateway-of-india"
+      slug: "gateway-of-india",
     },
     {
       name: "Khajuraho",
       location: "Madhya Pradesh",
-      description: "Temple complexes renowned for their nagara-style architecture and intricate sculptures.",
+      description:
+        "Temple complexes renowned for their nagara-style architecture and intricate sculptures.",
       imageSrc: "/images/khajuraho.jpg",
-      slug: "khajuraho"
+      slug: "khajuraho",
     },
     {
       name: "Sun Temple Konark",
       location: "Puri, Odisha",
-      description: "Massive temple designed as the chariot of the Sun God with elaborately carved stone wheels.",
+      description:
+        "Massive temple designed as the chariot of the Sun God with elaborately carved stone wheels.",
       imageSrc: "/images/konark_sun_temple.jpg",
-      slug: "sun-temple-konark"
-    }
+      slug: "sun-temple-konark",
+    },
   ];
 
   return (
     <div className="container mx-auto px-4">
       <div className="flex items-center justify-between mb-8">
-        <h2 className="text-2xl font-bold text-amber-900">Must-Visit Heritage Sites</h2>
-        <Link 
-          href="/suggested" 
+        <h2 className="text-2xl font-bold text-amber-900">
+          Must-Visit Heritage Sites
+        </h2>
+        <Link
+          href="/suggested"
           className="text-amber-600 hover:text-amber-800 font-medium"
         >
           View All →
@@ -138,53 +148,61 @@ const TrendingSection = () => {
     {
       name: "Charminar",
       location: "Hyderabad, Telangana",
-      description: "Iconic landmark with four grand arches and minarets built in 1591 CE.",
+      description:
+        "Iconic landmark with four grand arches and minarets built in 1591 CE.",
       imageSrc: "/images/charminar.jpg",
-      slug: "charminar"
+      slug: "charminar",
     },
     {
       name: "Golden Temple",
       location: "Amritsar, Punjab",
-      description: "Most sacred Sikh gurdwara with the spectacular Harmandir Sahib floating on a sacred pool.",
+      description:
+        "Most sacred Sikh gurdwara with the spectacular Harmandir Sahib floating on a sacred pool.",
       imageSrc: "/images/golden_temple.jpg",
-      slug: "golden-temple"
+      slug: "golden-temple",
     },
     {
       name: "Lotus Temple",
       location: "New Delhi",
-      description: "Architectural marvel shaped like a lotus flower, welcoming all faiths for meditation.",
+      description:
+        "Architectural marvel shaped like a lotus flower, welcoming all faiths for meditation.",
       imageSrc: "/images/lotus_temple.jpg",
-      slug: "lotus-temple"
+      slug: "lotus-temple",
     },
     {
       name: "Mysore Palace",
       location: "Mysore, Karnataka",
-      description: "Indo-Saracenic masterpiece featuring stained glass, carved wooden doors, and mosaic floors.",
+      description:
+        "Indo-Saracenic masterpiece featuring stained glass, carved wooden doors, and mosaic floors.",
       imageSrc: "/images/mysore_palace.jpg",
-      slug: "mysore-palace"
+      slug: "mysore-palace",
     },
     {
       name: "Qutub Minar",
       location: "New Delhi",
-      description: "World's tallest brick minaret, adorned with intricate carvings and verses from the Quran.",
+      description:
+        "World's tallest brick minaret, adorned with intricate carvings and verses from the Quran.",
       imageSrc: "/images/qutub_minar.jpg",
-      slug: "qutub-minar"
+      slug: "qutub-minar",
     },
     {
       name: "Victoria Memorial",
       location: "Kolkata, West Bengal",
-      description: "Magnificent white marble monument blending British and Mughal elements.",
+      description:
+        "Magnificent white marble monument blending British and Mughal elements.",
       imageSrc: "/images/victoria_memorial.jpg",
-      slug: "victoria-memorial"
-    }
+      slug: "victoria-memorial",
+    },
   ];
 
   return (
     <div className="container mx-auto px-4">
       <div className="flex items-center justify-between mb-8">
-        <h2 className="text-2xl font-bold text-amber-900">Trending Destinations</h2>
-        <Link 
-          href="/trending" 
+        <h2 className="text-2xl font-bold text-amber-900">
+          Trending Destinations
+        </h2>
+        <Link
+          href="/trending"
           className="text-amber-600 hover:text-amber-800 font-medium"
         >
           View All →
@@ -209,8 +227,8 @@ const ExplorePage = () => {
             Explore India&apos;s Rich Heritage
           </h1>
           <p className="text-lg text-amber-800 mb-8 max-w-3xl mx-auto">
-            Discover ancient wonders, architectural marvels, and cultural landmarks
-            across the Indian subcontinent.
+            Discover ancient wonders, architectural marvels, and cultural
+            landmarks across the Indian subcontinent.
           </p>
           <div className="flex justify-center">
             <SearchBar />
@@ -231,12 +249,15 @@ const ExplorePage = () => {
       {/* Call to Action */}
       <section className="py-12 bg-amber-800 text-white">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-2xl font-bold mb-4">Ready to Explore India&apos;s History?</h2>
+          <h2 className="text-2xl font-bold mb-4">
+            Ready to Explore India&apos;s History?
+          </h2>
           <p className="mb-6 max-w-2xl mx-auto">
-            Start planning your heritage journey today and discover the stories, architecture, and cultures that shaped the Indian subcontinent.
+            Start planning your heritage journey today and discover the stories,
+            architecture, and cultures that shaped the Indian subcontinent.
           </p>
-          <Link 
-            href="/itineraries" 
+          <Link
+            href="/itineraries"
             className="bg-white text-amber-800 hover:bg-amber-100 font-bold py-2 px-6 rounded-md transition-colors"
           >
             Plan Your Trip

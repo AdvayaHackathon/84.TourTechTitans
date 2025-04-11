@@ -2,7 +2,7 @@ import folium
 from folium import Popup
 from folium.plugins import MarkerCluster
 
-def generate_leaflet_map_from_api_output(api_output):
+def generate_custom_leaflet_map_from_api_output(api_output):
     """
     Generate an interactive Leaflet map using the output from find_nearby_places().
     Includes color-coded markers and a directions link for each POI.
