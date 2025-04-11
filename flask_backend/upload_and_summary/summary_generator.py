@@ -1,12 +1,21 @@
 import os
 import openai
 from gtts import gTTS
+from config import OPENAI_API_KEY
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
+openai.api_key = OPENAI_API_KEY
 
 # Generate summary via OpenAI Chat
 def get_openai_summary(landmark, language='en'):
-    prompt = f"Write a short, informative, and engaging historical summary about the landmark called '{landmark}' in {language}. Ensure the full summary fits within 500 words and is complete."
+    spoken_language = {
+        "en":"English",
+        "hi":"Hindi",
+        "kn":"Kannada",
+        "ta":"Tamil",
+        "te":"Telugu"
+    }
+
+    prompt = f"You are a multilingual tour guide. Write a short, informative, and engaging historical and cultural summary about the landmark called '{landmark}' in {spoken_language[language]}. Ensure the full summary fits within 750 words and is complete."
     try:
         response = openai.chat.completions.create(
             model="gpt-3.5-turbo",
