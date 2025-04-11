@@ -3,9 +3,9 @@
 // import { signIn } from "next-auth/react";
 
 export default function LoginPage() {
-  const handleLogin = () => {
-    signIn("google");
-  };
+  //   const handleLogin = () => {
+  //     // signIn("google");
+  //   };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-amber-50 px-4">
@@ -18,7 +18,7 @@ export default function LoginPage() {
           journey now.
         </p>
         <button
-          onClick={handleLogin}
+          //   onClick={handleLogin}
           className="bg-amber-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-amber-700 transition shadow-md"
         >
           Sign in with Google
