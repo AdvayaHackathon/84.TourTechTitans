@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "lucide-react": "^0.487.0",
-    "nookies": "^2.5.2"
+    "lucide-react": "^0.487.0"
   }
 }

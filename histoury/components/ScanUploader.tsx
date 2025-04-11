@@ -2,22 +2,33 @@
 
 import { useRef, useState, DragEvent, ChangeEvent, useEffect } from "react";
 import Image from "next/image";
+
+// Add Camera icon import
 import { Camera } from "lucide-react";
 
-export default function ScanUploader() {
+export default function ScanUploader({
+  onDetect,
+}: {
+  onDetect: (landmark: string, coords: { lat: number; lng: number }) => void;
+}) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [landmark, setLandmark] = useState<string | null>(null);
+  const [coords, setCoords] = useState<{ lat: number; lng: number } | null>(
+    null
+  );
+  const [loading, setLoading] = useState(false);
   const [dragging, setDragging] = useState(false);
   const [showCamera, setShowCamera] = useState(false);
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [cameraLoading, setCameraLoading] = useState(false);
-  
+
   // Clean up camera stream when component unmounts
   useEffect(() => {
     return () => {
       if (stream) {
-        stream.getTracks().forEach(track => track.stop());
+        stream.getTracks().forEach((track) => track.stop());
       }
     };
   }, [stream]);
@@ -35,6 +46,36 @@ export default function ScanUploader() {
       setPreviewUrl(reader.result as string);
     };
     reader.readAsDataURL(file);
+    uploadToBackend(file);
+  };
+
+  const uploadToBackend = async (file: File) => {
+    setLoading(true);
+    const formData = new FormData();
+    formData.append("image", file);
+
+    try {
+      const res = await fetch("http://localhost:8000/detect_landmark/", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+      if (data.name && data.lat && data.lng) {
+        setLandmark(data.name);
+        const coordData = { lat: data.lat, lng: data.lng };
+        setCoords(coordData);
+        onDetect(data.name, coordData); // Pass to parent
+      } else {
+        setLandmark("Could not detect landmark");
+        setCoords(null);
+      }
+    } catch (err) {
+      console.error("Upload error:", err);
+      setLandmark("Error contacting backend");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleDrop = (e: DragEvent<HTMLDivElement>) => {
@@ -65,30 +106,34 @@ export default function ScanUploader() {
 
   const startCamera = async () => {
     setCameraLoading(true);
-    
+
     try {
       // First set up UI state
       setShowCamera(true);
-      
+
       // Then request camera access
-      const mediaStream = await navigator.mediaDevices.getUserMedia({ 
-        video: { 
+      const mediaStream = await navigator.mediaDevices.getUserMedia({
+        video: {
           facingMode: "environment",
           width: { ideal: 1280 },
-          height: { ideal: 720 }
-        } 
+          height: { ideal: 720 },
+        },
       });
-      
+
       setStream(mediaStream);
-      
+
       // Directly set the stream to video element
       if (videoRef.current) {
         videoRef.current.srcObject = mediaStream;
-        videoRef.current.play().catch(err => console.error("Error playing video:", err));
+        videoRef.current
+          .play()
+          .catch((err) => console.error("Error playing video:", err));
       }
     } catch (err) {
       console.error("Error accessing camera:", err);
-      alert("Could not access your camera. Please make sure you have granted camera permissions.");
+      alert(
+        "Could not access your camera. Please make sure you have granted camera permissions."
+      );
       setShowCamera(false);
     } finally {
       setCameraLoading(false);
@@ -97,7 +142,7 @@ export default function ScanUploader() {
 
   const stopCamera = () => {
     if (stream) {
-      stream.getTracks().forEach(track => track.stop());
+      stream.getTracks().forEach((track) => track.stop());
       setStream(null);
     }
     setShowCamera(false);
@@ -105,25 +150,36 @@ export default function ScanUploader() {
 
   const capturePhoto = () => {
     if (!videoRef.current || !stream) return;
-    
+
     // Create a canvas to capture the image
     const canvas = document.createElement("canvas");
     const videoElement = videoRef.current;
     const width = videoElement.videoWidth;
     const height = videoElement.videoHeight;
-    
+
     canvas.width = width;
     canvas.height = height;
-    
+
     // Draw the video frame to the canvas
     const context = canvas.getContext("2d");
     if (context) {
       context.drawImage(videoElement, 0, 0, width, height);
-      
+
       // Convert to data URL and set as preview
       const imageDataUrl = canvas.toDataURL("image/jpeg");
       setPreviewUrl(imageDataUrl);
-      
+
+      // Convert data URL to File object
+      canvas.toBlob((blob) => {
+        if (blob) {
+          const file = new File([blob], "captured-image.jpg", {
+            type: "image/jpeg",
+          });
+          // Upload the captured image to backend
+          uploadToBackend(file);
+        }
+      }, "image/jpeg");
+
       // Stop the camera after capture
       stopCamera();
     }
@@ -131,17 +187,19 @@ export default function ScanUploader() {
 
   const uploadImage = () => {
     if (previewUrl) {
-      // Implement your actual upload logic here
-      console.log("Uploading image:", previewUrl.substring(0, 50) + "...");
-      
-      // Example of how you might upload the image
-      // fetch('/api/upload', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({ imageData: previewUrl })
-      // });
-      
-      alert("Image uploaded successfully!");
+      // Convert dataURL to a File for upload
+      fetch(previewUrl)
+        .then((res) => res.blob())
+        .then((blob) => {
+          const file = new File([blob], "uploaded-image.jpg", {
+            type: "image/jpeg",
+          });
+          uploadToBackend(file);
+        })
+        .catch((err) => {
+          console.error("Error processing image:", err);
+          alert("Error processing image. Please try again.");
+        });
     }
   };
 
@@ -164,7 +222,9 @@ export default function ScanUploader() {
           <div className="relative w-full flex flex-col items-center">
             {cameraLoading && (
               <div className="absolute inset-0 flex items-center justify-center bg-gray-100 bg-opacity-70 z-10 rounded">
-                <div className="text-amber-700 font-bold">Accessing camera...</div>
+                <div className="text-amber-700 font-bold">
+                  Accessing camera...
+                </div>
               </div>
             )}
             <video
@@ -244,6 +304,24 @@ export default function ScanUploader() {
           </div>
         )}
       </div>
+
+      {loading && (
+        <p className="text-center mt-4 text-amber-600">
+          🔍 Detecting landmark...
+        </p>
+      )}
+
+      {landmark && (
+        <div className="mt-6 bg-amber-50 p-4 rounded-lg shadow">
+          <h3 className="font-semibold text-lg">📍 Detected Landmark:</h3>
+          <p className="text-amber-800">{landmark}</p>
+          {coords && (
+            <p className="text-sm text-amber-600">
+              Latitude: {coords.lat}, Longitude: {coords.lng}
+            </p>
+          )}
+        </div>
+      )}
 
       {/* Camera Button - Only show when not already using camera */}
       {!showCamera && !previewUrl && (
