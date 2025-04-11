@@ -33,13 +33,12 @@ export default function Home() {
               </div>
             </div>
             <div className="md:w-1/2 relative">
-              <div className="relative h-80 md:h-96 w-full rounded-lg overflow-hidden shadow-xl">
+              <div className="relative w-full aspect-[4/3] md:aspect-[16/9] rounded-lg overflow-hidden shadow-xl">
                 <Image
                   src="/heroImage.png"
                   alt="Historical artifacts and documents"
-                  layout="fill"
-                  objectFit="cover"
-                  className="rounded-lg"
+                  fill
+                  className="object-cover"
                 />
               </div>
             </div>
