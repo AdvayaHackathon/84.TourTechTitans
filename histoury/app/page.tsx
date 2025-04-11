@@ -1,5 +1,7 @@
+import SuggestedSection from "@/components/SuggestedSection";
 import Image from "next/image";
 import Link from "next/link";
+import { homeSuggestions } from "@/public/data/homeSuggestions";
 
 export default function Home() {
   return (
@@ -140,99 +142,7 @@ export default function Home() {
 
       {/* Suggested For You Section */}
       <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center justify-between mb-12">
-            <h2 className="text-3xl font-bold text-amber-900">
-              Suggested for You
-            </h2>
-            <Link
-              href="/explore"
-              className="text-amber-700 hover:text-amber-900 font-medium"
-            >
-              Explore All &rarr;
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-amber-50 rounded-lg overflow-hidden shadow-md">
-              <div className="relative h-48">
-                <Image
-                  src="/images/suggestion1.jpg"
-                  alt="Ancient Wonders"
-                  layout="fill"
-                  objectFit="cover"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-amber-900 mb-2">
-                  Wonders of the Ancient World
-                </h3>
-                <p className="text-amber-700 mb-4">
-                  Explore iconic landmarks that stood the test of time and still
-                  captivate the imagination today.
-                </p>
-                <Link
-                  href="/collections/ancient-wonders"
-                  className="text-amber-600 hover:text-amber-800 font-medium"
-                >
-                  Discover &rarr;
-                </Link>
-              </div>
-            </div>
-
-            <div className="bg-amber-50 rounded-lg overflow-hidden shadow-md">
-              <div className="relative h-48">
-                <Image
-                  src="/images/suggestion2.jpg"
-                  alt="World Wars"
-                  layout="fill"
-                  objectFit="cover"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-amber-900 mb-2">
-                  Chronicles of War
-                </h3>
-                <p className="text-amber-700 mb-4">
-                  Relive pivotal moments from World War I and II that redefined
-                  the global order.
-                </p>
-                <Link
-                  href="/collections/war-chronicles"
-                  className="text-amber-600 hover:text-amber-800 font-medium"
-                >
-                  Learn More &rarr;
-                </Link>
-              </div>
-            </div>
-
-            <div className="bg-amber-50 rounded-lg overflow-hidden shadow-md">
-              <div className="relative h-48">
-                <Image
-                  src="/images/suggestion3.jpg"
-                  alt="Historic Cities"
-                  layout="fill"
-                  objectFit="cover"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-amber-900 mb-2">
-                  Timeless Cities to Visit
-                </h3>
-                <p className="text-amber-700 mb-4">
-                  Travel back in time with our guide to the world's most
-                  historically rich cities.
-                </p>
-                <Link
-                  href="/places/historic-cities"
-                  className="text-amber-600 hover:text-amber-800 font-medium"
-                >
-                  Explore Now &rarr;
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
+        <SuggestedSection places={homeSuggestions} showExploreLink={true} />
       </section>
     </div>
   );
