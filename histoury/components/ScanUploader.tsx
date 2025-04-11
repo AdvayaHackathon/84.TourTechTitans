@@ -125,16 +125,9 @@ export default function ScanUploader({
       // Directly set the stream to video element
       if (videoRef.current) {
         videoRef.current.srcObject = mediaStream;
-
-        // Instead of immediately calling play(), set up an event handler
-        // to play when the video element has loaded the stream metadata
-        videoRef.current.onloadedmetadata = () => {
-          if (videoRef.current) {
-            videoRef.current
-              .play()
-              .catch((err) => console.error("Error playing video:", err));
-          }
-        };
+        videoRef.current
+          .play()
+          .catch((err) => console.error("Error playing video:", err));
       }
     } catch (err) {
       console.error("Error accessing camera:", err);
