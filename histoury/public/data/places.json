@@ -1,0 +1,732 @@
+{
+  "places": {
+    "ajanta-caves": {
+      "name": "Ajanta Caves",
+      "location": "Aurangabad, Maharashtra",
+      "period": "2nd century BCE to 6th century CE",
+      "description": "Buddhist rock-cut cave monuments with paintings and sculptures dating from the 2nd century BCE.",
+      "fullDescription": [
+        "The Ajanta Caves are approximately 30 rock-cut Buddhist cave monuments dating from the 2nd century BCE to about 480 CE in the Aurangabad district of Maharashtra state in India.",
+        "The caves include paintings and rock-cut sculptures described as among the finest surviving examples of ancient Indian art, particularly expressive paintings that present emotions through gesture, pose and form.",
+        "According to UNESCO, these are masterpieces of Buddhist religious art that influenced the development of art in India and elsewhere."
+      ],
+      "images": [
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600"
+      ],
+      "facts": [
+        "The caves were built in two phases, the first starting around the 2nd century BCE and the second occurring from 400–650 CE.",
+        "They were abandoned around 650 CE and forgotten until they were rediscovered in 1819 by a British officer on a tiger hunt.",
+        "The Ajanta Caves were designated a UNESCO World Heritage Site in 1983.",
+        "The caves contain some of the best examples of ancient Indian painting and sculpture."
+      ],
+      "visitorInfo": {
+        "timings": "9:00 AM to 5:30 PM, closed on Mondays",
+        "entryFee": "₹40 for Indian citizens, ₹600 for foreign tourists",
+        "bestTimeToVisit": "October to March",
+        "nearestAirport": "Aurangabad Airport (35 km)",
+        "nearestRailway": "Jalgaon Railway Station (59 km)"
+      },
+      "coordinates": {
+        "latitude": "20.5519",
+        "longitude": "75.6997"
+      },
+      "nearbyAttractions": [
+        {
+          "name": "Ellora Caves",
+          "distance": "100 km",
+          "slug": "ellora-caves"
+        },
+        {
+          "name": "Bibi Ka Maqbara",
+          "distance": "104 km",
+          "slug": "bibi-ka-maqbara"
+        },
+        {
+          "name": "Daulatabad Fort",
+          "distance": "110 km",
+          "slug": "daulatabad-fort"
+        }
+      ],
+      "slug": "ajanta-caves"
+    },
+    "ellora-caves": {
+      "name": "Ellora Caves",
+      "location": "Aurangabad, Maharashtra",
+      "period": "6th to 11th century CE",
+      "description": "Remarkable cave temples featuring Buddhist, Hindu, and Jain monuments carved from a single rock face.",
+      "fullDescription": [
+        "The Ellora Caves are a UNESCO World Heritage Site located in the Aurangabad district of Maharashtra, India. Dating from the 6th to 11th century CE, these caves represent the epitome of Indian rock-cut architecture.",
+        "Unlike the Ajanta Caves, which are predominantly Buddhist, Ellora features Buddhist, Hindu, and Jain monuments that highlight religious coexistence in ancient India.",
+        "The most remarkable of all the caves is the Kailasa Temple (Cave 16), which is the largest monolithic structure in the world, carved out of a single rock."
+      ],
+      "images": [
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600"
+      ],
+      "facts": [
+        "Ellora has 34 caves - 12 Buddhist (caves 1-12), 17 Hindu (caves 13-29) and 5 Jain (caves 30-34).",
+        "The Kailasa Temple is twice the size of the Parthenon in Athens and is carved from top to bottom into the mountainside.",
+        "It's estimated that about 200,000 tons of rock were removed to create the Kailasa Temple.",
+        "The site serves as an important feature in trade routes of ancient India, connecting major cities like Ujjain and Mahishmati."
+      ],
+      "visitorInfo": {
+        "timings": "9:00 AM to 5:30 PM, closed on Tuesdays",
+        "entryFee": "₹40 for Indian citizens, ₹600 for foreign tourists",
+        "bestTimeToVisit": "November to March",
+        "nearestAirport": "Aurangabad Airport (30 km)",
+        "nearestRailway": "Aurangabad Railway Station (29 km)"
+      },
+      "coordinates": {
+        "latitude": "20.0258",
+        "longitude": "75.1780"
+      },
+      "nearbyAttractions": [
+        {
+          "name": "Ajanta Caves",
+          "distance": "100 km",
+          "slug": "ajanta-caves"
+        },
+        {
+          "name": "Daulatabad Fort",
+          "distance": "35 km",
+          "slug": "daulatabad-fort"
+        },
+        {
+          "name": "Bibi Ka Maqbara",
+          "distance": "30 km",
+          "slug": "bibi-ka-maqbara"
+        }
+      ],
+      "slug": "ellora-caves"
+    },
+    "hawa-mahal": {
+      "name": "Hawa Mahal",
+      "location": "Jaipur, Rajasthan",
+      "period": "1799 CE",
+      "description": "The 'Palace of Winds' with its unique honeycomb facade featuring 953 small windows.",
+      "fullDescription": [
+        "Hawa Mahal, or the 'Palace of Winds', is a magnificent five-story palace built in 1799 by Maharaja Sawai Pratap Singh of the Kachhwaha Rajput dynasty.",
+        "The unique honeycomb structure was designed to allow royal ladies to observe everyday life and festivals on the street below without being seen, in accordance with the strict 'purdah' practice which forbade them from appearing in public without face coverings.",
+        "The architectural style is a remarkable fusion of Hindu Rajput and Islamic Mughal architecture, reflecting the cultural blend of the region."
+      ],
+      "images": [
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600"
+      ],
+      "facts": [
+        "The palace has 953 small windows called 'jharokhas' that are decorated with intricate latticework.",
+        "The structure was built using red and pink sandstone, in keeping with the trademark color of Jaipur city.",
+        "Despite its appearance, it is actually only one room deep in most places.",
+        "The palace was designed in the form of Lord Krishna's crown."
+      ],
+      "visitorInfo": {
+        "timings": "9:00 AM to 5:00 PM, open all days",
+        "entryFee": "₹50 for Indian citizens, ₹200 for foreign tourists",
+        "bestTimeToVisit": "October to March",
+        "nearestAirport": "Jaipur International Airport (13 km)",
+        "nearestRailway": "Jaipur Railway Station (5 km)"
+      },
+      "coordinates": {
+        "latitude": "26.9239",
+        "longitude": "75.8267"
+      },
+      "nearbyAttractions": [
+        {
+          "name": "City Palace",
+          "distance": "1 km",
+          "slug": "city-palace-jaipur"
+        },
+        {
+          "name": "Jantar Mantar",
+          "distance": "1.2 km",
+          "slug": "jantar-mantar"
+        },
+        {
+          "name": "Amber Fort",
+          "distance": "11 km",
+          "slug": "amber-fort"
+        }
+      ],
+      "slug": "hawa-mahal"
+    },
+    "gateway-of-india": {
+      "name": "Gateway of India",
+      "location": "Mumbai, Maharashtra",
+      "period": "1924 CE",
+      "description": "Iconic monument built to commemorate the visit of King George V and Queen Mary to Mumbai.",
+      "fullDescription": [
+        "The Gateway of India is an arch monument built during the 20th century in Mumbai. The monument was erected to commemorate the landing of King George V and Queen Mary at Apollo Bunder on their visit to India in 1911.",
+        "Built in Indo-Saracenic style, the foundation stone for the Gateway of India was laid on 31 March 1911. The final design of George Wittet was sanctioned in 1914 and the construction was completed in 1924.",
+        "The Gateway of India is located on the waterfront at Apollo Bunder area at the end of Chhatrapati Shivaji Marg in South Mumbai and overlooks the Arabian Sea."
+      ],
+      "images": [
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600"
+      ],
+      "facts": [
+        "The Gateway of India is 26 meters (85 feet) high and built from yellow basalt and reinforced concrete.",
+        "The last British troops to leave India following independence passed through the Gateway in a ceremony on February 28, 1948.",
+        "The central dome is 48 feet in diameter and 83 feet above ground at its highest point.",
+        "The monument faces the vast Arabian Sea and serves as a popular spot for both tourists and locals."
+      ],
+      "visitorInfo": {
+        "timings": "Open 24 hours, all days",
+        "entryFee": "Free",
+        "bestTimeToVisit": "November to March",
+        "nearestAirport": "Chhatrapati Shivaji International Airport (26 km)",
+        "nearestRailway": "Chhatrapati Shivaji Terminus (CST) (2.5 km)"
+      },
+      "coordinates": {
+        "latitude": "18.9220",
+        "longitude": "72.8347"
+      },
+      "nearbyAttractions": [
+        {
+          "name": "Taj Mahal Palace Hotel",
+          "distance": "0.1 km",
+          "slug": "taj-mahal-palace-hotel"
+        },
+        {
+          "name": "Elephanta Caves",
+          "distance": "10 km by ferry",
+          "slug": "elephanta-caves"
+        },
+        {
+          "name": "Marine Drive",
+          "distance": "3 km",
+          "slug": "marine-drive"
+        }
+      ],
+      "slug": "gateway-of-india"
+    },
+    "khajuraho": {
+      "name": "Khajuraho",
+      "location": "Madhya Pradesh",
+      "period": "950-1050 CE",
+      "description": "Temple complexes renowned for their nagara-style architecture and intricate sculptures.",
+      "fullDescription": [
+        "The Khajuraho Group of Monuments is a group of Hindu and Jain temples in Madhya Pradesh, India. They are one of the UNESCO World Heritage Sites in India and are famous for their nagara-style architectural symbolism and erotic sculptures.",
+        "Most of the temples were built between 950 and 1050 CE by the Chandela dynasty. Originally there were 85 temples, of which only 25 remain today, spread over an area of 20 square kilometers.",
+        "The temples are divided into three geographical groups: Western, Eastern and Southern. The Western group contains the largest and most famous temples, including the Kandariya Mahadeva Temple."
+      ],
+      "images": [
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600"
+      ],
+      "facts": [
+        "The temples are famous for their nagara-style architectural symbolism and their erotic sculptures.",
+        "Only about 10% of the sculptures are erotic in nature, while the rest depict various aspects of daily life and mythological narratives.",
+        "The temples were rediscovered in the late 19th century after being hidden in dense forest for centuries.",
+        "The main deity in most of the temples is Lord Shiva, shown in various forms."
+      ],
+      "visitorInfo": {
+        "timings": "8:00 AM to 6:00 PM, open all days",
+        "entryFee": "₹40 for Indian citizens, ₹600 for foreign tourists",
+        "bestTimeToVisit": "October to March",
+        "nearestAirport": "Khajuraho Airport (5 km)",
+        "nearestRailway": "Khajuraho Railway Station (5.5 km)"
+      },
+      "coordinates": {
+        "latitude": "24.8318",
+        "longitude": "79.9199"
+      },
+      "nearbyAttractions": [
+        {
+          "name": "Panna National Park",
+          "distance": "30 km",
+          "slug": "panna-national-park"
+        },
+        {
+          "name": "Raneh Falls",
+          "distance": "20 km",
+          "slug": "raneh-falls"
+        },
+        {
+          "name": "Pandav Falls",
+          "distance": "35 km",
+          "slug": "pandav-falls"
+        }
+      ],
+      "slug": "khajuraho"
+    },
+    "sun-temple-konark": {
+      "name": "Sun Temple Konark",
+      "location": "Puri, Odisha",
+      "period": "13th century CE",
+      "description": "Massive temple designed as the chariot of the Sun God with elaborately carved stone wheels.",
+      "fullDescription": [
+        "The Konark Sun Temple is a 13th-century CE sun temple at Konark about 35 kilometres northeast from Puri on the coastline of Odisha, India. The temple is attributed to king Narasimhadeva I of the Eastern Ganga Dynasty about 1250 CE.",
+        "The temple is in the shape of a gigantic chariot with elaborately carved stone wheels, pillars and walls. It was conceived as the cosmic chariot of the Sun God Surya, with 24 wheels drawn by seven horses.",
+        "The temple is a UNESCO World Heritage Site and has also been featured on various list of Seven Wonders of India. The temple is currently partially in ruins, with most of the main sanctum tower collapsed."
+      ],
+      "images": [
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600"
+      ],
+      "facts": [
+        "The temple was designed as a chariot mounted on 24 wheels, each about 10 feet in diameter, and drawn by 7 horses.",
+        "The temple was positioned so that the first rays of the sun would fall on the main entrance.",
+        "The wheels of the temple are sundials which can be used to calculate the precise time of day.",
+        "The temple structure was originally much taller, but the main tower collapsed in the late 19th century."
+      ],
+      "visitorInfo": {
+        "timings": "6:00 AM to 8:00 PM, open all days",
+        "entryFee": "₹40 for Indian citizens, ₹600 for foreign tourists",
+        "bestTimeToVisit": "October to March",
+        "nearestAirport": "Biju Patnaik International Airport, Bhubaneswar (60 km)",
+        "nearestRailway": "Puri Railway Station (35 km)"
+      },
+      "coordinates": {
+        "latitude": "19.8876",
+        "longitude": "86.0945"
+      },
+      "nearbyAttractions": [
+        {
+          "name": "Puri Jagannath Temple",
+          "distance": "35 km",
+          "slug": "jagannath-temple"
+        },
+        {
+          "name": "Chandrabhaga Beach",
+          "distance": "3 km",
+          "slug": "chandrabhaga-beach"
+        },
+        {
+          "name": "Ramachandi Temple",
+          "distance": "7 km",
+          "slug": "ramachandi-temple"
+        }
+      ],
+      "slug": "sun-temple-konark"
+    },
+    "charminar": {
+      "name": "Charminar",
+      "location": "Hyderabad, Telangana",
+      "period": "1591 CE",
+      "description": "Iconic landmark with four grand arches and minarets built in 1591 CE.",
+      "fullDescription": [
+        "The Charminar ('Four Minarets') is a monument and mosque located in Hyderabad, Telangana, India. The landmark was built by Muhammad Quli Qutb Shah, the fifth sultan of the Qutb Shahi dynasty in 1591 CE.",
+        "The structure was constructed to commemorate the eradication of a plague that had ravaged the city. The Charminar is situated in the heart of the old city of Hyderabad and has become an inseparable part of its global identity.",
+        "The structure is a beautiful example of Indo-Islamic architecture with Persian influences. Each side of the square structure measures 20 meters, and each of the four grand arches measures 11 meters wide and rises 20 meters to the pinnacle from the plinth."
+      ],
+      "images": [
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600"
+      ],
+      "facts": [
+        "The Charminar was built in 1591 CE, reportedly after shifting the capital city from Golkonda to what is now known as Hyderabad.",
+        "The structure got its name from its four (char) minarets (minar), each representing the first four caliphs of Islam.",
+        "The monument houses a mosque on the top floor, which is one of the oldest mosques in the city.",
+        "The structure is also known as 'The Arc de Triomphe of the East'."
+      ],
+      "visitorInfo": {
+        "timings": "9:00 AM to 5:30 PM, closed on Fridays",
+        "entryFee": "₹25 for Indian citizens, ₹300 for foreign tourists",
+        "bestTimeToVisit": "October to March",
+        "nearestAirport": "Rajiv Gandhi International Airport (20 km)",
+        "nearestRailway": "Hyderabad Deccan Railway Station (5 km)"
+      },
+      "coordinates": {
+        "latitude": "17.3616",
+        "longitude": "78.4747"
+      },
+      "nearbyAttractions": [
+        {
+          "name": "Laad Bazaar",
+          "distance": "0.2 km",
+          "slug": "laad-bazaar"
+        },
+        {
+          "name": "Mecca Masjid",
+          "distance": "0.3 km",
+          "slug": "mecca-masjid"
+        },
+        {
+          "name": "Chowmahalla Palace",
+          "distance": "1 km",
+          "slug": "chowmahalla-palace"
+        }
+      ],
+      "slug": "charminar"
+    },
+    "golden-temple": {
+      "name": "Golden Temple",
+      "location": "Amritsar, Punjab",
+      "period": "16th century CE",
+      "description": "Most sacred Sikh gurdwara with the spectacular Harmandir Sahib floating on a sacred pool.",
+      "fullDescription": [
+        "The Golden Temple, also known as Sri Harmandir Sahib or Darbar Sahib, is the holiest gurdwara and the most important pilgrimage site of Sikhism, located in the city of Amritsar, Punjab, India.",
+        "The temple is built around a man-made pool (sarovar) that was completed by Guru Ram Das in 1577. The fourth Sikh Guru, Guru Ram Das, excavated the sacred pool and in 1604, Guru Arjan Dev, the fifth Sikh Guru, placed the Adi Granth, the holy scripture of Sikhism, inside the temple.",
+        "The temple is an open house of worship for all people, regardless of their religion, gender, or ethnicity. It has four entrances, symbolizing the openness of Sikhs towards all people and religions."
+      ],
+      "images": [
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600"
+      ],
+      "facts": [
+        "The upper floors of the Golden Temple are covered with approximately 750 kg of gold, which gives it its distinctive appearance and English name.",
+        "The Langar (community kitchen) at the Golden Temple serves free meals to approximately 100,000 visitors daily, regardless of religion, caste, or creed.",
+        "The temple complex houses the Akal Takht (Throne of the Timeless One), one of the five seats of power for Sikhs.",
+        "The foundation stone of the temple was laid by a Muslim saint, Mian Mir, demonstrating the inclusive philosophy of Sikhism."
+      ],
+      "visitorInfo": {
+        "timings": "Open 24 hours, all days",
+        "entryFee": "Free",
+        "bestTimeToVisit": "October to March",
+        "nearestAirport": "Sri Guru Ram Dass Jee International Airport (11 km)",
+        "nearestRailway": "Amritsar Junction Railway Station (2 km)"
+      },
+      "coordinates": {
+        "latitude": "31.6200",
+        "longitude": "74.8765"
+      },
+      "nearbyAttractions": [
+        {
+          "name": "Jallianwala Bagh",
+          "distance": "0.3 km",
+          "slug": "jallianwala-bagh"
+        },
+        {
+          "name": "Wagah Border",
+          "distance": "28 km",
+          "slug": "wagah-border"
+        },
+        {
+          "name": "Partition Museum",
+          "distance": "1 km",
+          "slug": "partition-museum"
+        }
+      ],
+      "slug": "golden-temple"
+    },
+    "lotus-temple": {
+      "name": "Lotus Temple",
+      "location": "New Delhi",
+      "period": "1986 CE",
+      "description": "Architectural marvel shaped like a lotus flower, welcoming all faiths for meditation.",
+      "fullDescription": [
+        "The Lotus Temple, located in Delhi, India, is a Bahá'í House of Worship that was dedicated in December 1986. Notable for its flowerlike shape, it has become a prominent attraction in the city.",
+        "The building is composed of 27 free-standing marble-clad 'petals' arranged in clusters of three to form nine sides. The nine doors of the Lotus Temple open onto a central hall slightly more than 40 meters tall that can accommodate up to 2,500 people.",
+        "Like all Bahá'í Houses of Worship, the Lotus Temple is open to all, regardless of religion or any other qualification. The building has no images, icons, or pictures displayed inside. The service consists of prayers and readings from the holy books of the Bahá'í Faith as well as other religions."
+      ],
+      "images": [
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600"
+      ],
+      "facts": [
+        "The temple gives the impression of a half-open lotus flower, with 27 marble petals.",
+        "The architect, Fariborz Sahba, was inspired by the lotus flower, which has significance in several religions including Hinduism and Buddhism.",
+        "The Lotus Temple has received numerous architectural awards and has been featured in hundreds of newspaper and magazine articles.",
+        "Since its opening in 1986, it has attracted more than 70 million visitors, making it one of the most visited buildings in the world."
+      ],
+      "visitorInfo": {
+        "timings": "9:00 AM to 5:30 PM, closed on Mondays",
+        "entryFee": "Free",
+        "bestTimeToVisit": "October to March",
+        "nearestAirport": "Indira Gandhi International Airport (16 km)",
+        "nearestRailway": "Hazrat Nizamuddin Railway Station (7 km)"
+      },
+      "coordinates": {
+        "latitude": "28.5535",
+        "longitude": "77.2588"
+      },
+      "nearbyAttractions": [
+        {
+          "name": "ISKCON Temple",
+          "distance": "4 km",
+          "slug": "iskcon-temple"
+        },
+        {
+          "name": "Humayun's Tomb",
+          "distance": "10 km",
+          "slug": "humayuns-tomb"
+        },
+        {
+          "name": "Qutub Minar",
+          "distance": "15 km",
+          "slug": "qutub-minar"
+        }
+      ],
+      "slug": "lotus-temple"
+    },
+    "mysore-palace": {
+      "name": "Mysore Palace",
+      "location": "Mysore, Karnataka",
+      "period": "1912 CE",
+      "description": "Indo-Saracenic masterpiece featuring stained glass, carved wooden doors, and mosaic floors.",
+      "fullDescription": [
+        "The Mysore Palace, officially known as Mysuru Palace, is a historical palace and a royal residence located in Mysore, Karnataka. It is one of the most famous tourist attractions in India, after the Taj Mahal, with more than 6 million annual visitors.",
+        "The current palace was commissioned in 1897, after the old palace was destroyed in a fire during the wedding of Princess Jayalakshammanni. The construction was completed in 1912 and expanded around 1940 during the reign of Jayachamarajendra Wadiyar, the 25th ruler of the Wadiyar dynasty.",
+        "The palace is a three-story stone structure with marble domes and a 145-foot five-story tower. The palace is surrounded by a large garden and is spectacularly illuminated on Sundays and during festivals with nearly 100,000 lights."
+      ],
+      "images": [
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600"
+      ],
+      "facts": [
+        "The Mysore Palace is one of the most visited monuments in India with over 6 million annual visitors.",
+        "The palace is illuminated by nearly 100,000 light bulbs during Sundays and state festivals, creating a breathtaking spectacle.",
+        "The architectural style of the palace is a creative blend of Hindu, Muslim, Rajput, and Gothic styles.",
+        "The Durbar Hall within the palace has an ornate ceiling and many sculpted pillars, which were imported from Britain."
+      ],
+      "visitorInfo": {
+        "timings": "10:00 AM to 5:30 PM, open all days",
+        "entryFee": "₹70 for Indian citizens, ₹300 for foreign tourists",
+        "bestTimeToVisit": "September to March",
+        "nearestAirport": "Mysore Airport (10 km)",
+        "nearestRailway": "Mysore Junction Railway Station (2 km)"
+      },
+      "coordinates": {
+        "latitude": "12.3052",
+        "longitude": "76.6552"
+      },
+      "nearbyAttractions": [
+        {
+          "name": "Chamundi Hill",
+          "distance": "13 km",
+          "slug": "chamundi-hill"
+        },
+        {
+          "name": "Brindavan Gardens",
+          "distance": "21 km",
+          "slug": "brindavan-gardens"
+        },
+        {
+          "name": "Mysore Zoo",
+          "distance": "2 km",
+          "slug": "mysore-zoo"
+        }
+      ],
+      "slug": "mysore-palace"
+    },
+    "qutub-minar": {
+      "name": "Qutub Minar",
+      "location": "New Delhi",
+      "period": "1192-1220 CE",
+      "description": "World's tallest brick minaret, adorned with intricate carvings and verses from the Quran.",
+      "fullDescription": [
+        "The Qutub Minar is a minaret and victory tower that forms part of the Qutub complex, a UNESCO World Heritage Site in the Mehrauli area of Delhi, India. The height of Qutub Minar is 72.5 meters (237.8 ft), making it the tallest minaret in India.",
+        "The tower was built by Qutb-ud-din Aibak, founder of the Delhi Sultanate in 1192 CE. It was later completed by his successor and son-in-law, Iltutmish. The minaret is made of red sandstone and marble, and is covered with intricate carvings and verses from the Quran.",
+        "The Qutub complex, surrounding the Minar, has many other historic monuments including the Iron Pillar, Quwwat-ul-Islam Mosque, Alauddin Khilji's tomb and madrasa, the tombs of Iltutmish, Alauddin Khilji and Imam Zamin, and the Alai Darwaza."
+      ],
+      "images": [
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600"
+      ],
+      "facts": [
+        "The Qutub Minar is 72.5 meters (237.8 ft) high, with 379 stairs leading to the top.",
+        "The diameter of the base is 14.3 meters wide while the top floor measures 2.7 meters in diameter.",
+        "The minaret is made of red sandstone and marble, and is inscribed with verses from the Quran.",
+        "Inside the complex stands the Iron Pillar, which has stood rust-free for over 1,600 years, showcasing the advanced metallurgical skills of ancient Indian ironsmiths."
+      ],
+      "visitorInfo": {
+        "timings": "7:00 AM to 5:00 PM, open all days",
+        "entryFee": "₹40 for Indian citizens, ₹600 for foreign tourists",
+        "bestTimeToVisit": "October to March",
+        "nearestAirport": "Indira Gandhi International Airport (15 km)",
+        "nearestRailway": "New Delhi Railway Station (16 km)"
+      },
+      "coordinates": {
+        "latitude": "28.5245",
+        "longitude": "77.1855"
+      },
+      "nearbyAttractions": [
+        {
+          "name": "Humayun's Tomb",
+          "distance": "12 km",
+          "slug": "humayuns-tomb"
+        },
+        {
+          "name": "Red Fort",
+          "distance": "18 km",
+          "slug": "red-fort"
+        },
+        {
+          "name": "India Gate",
+          "distance": "14 km",
+          "slug": "india-gate"
+        }
+      ],
+     "slug": "qutub-minar"
+    },
+    "victoria-memorial": {
+      "name": "Victoria Memorial",
+      "location": "Kolkata, West Bengal",
+      "period": "1906-1921 CE",
+      "description": "Magnificent white marble monument blending British and Mughal elements.",
+      "fullDescription": [
+        "The Victoria Memorial is a large marble building in Kolkata, West Bengal, India, which was built between 1906 and 1921. It is dedicated to the memory of Queen Victoria, Empress of India from 1876 to 1901.",
+        "The memorial was designed by Sir William Emerson in Indo-Saracenic style, blending British and Mughal elements, and built with white Makrana marble. The memorial spans 57 acres and is surrounded by lush gardens.",
+        "Today, the Victoria Memorial Hall is a museum under the Ministry of Culture, and it now serves as a 'museum of memories' of the British Raj era. It houses numerous rare and antique paintings, sculptures, artifacts, and books in its collection."
+      ],
+      "images": [
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600"
+      ],
+      "facts": [
+        "The Victoria Memorial was funded by donations from Indian states and individuals, with the majority of the cost being borne by the British government.",
+        "The memorial has a unique collection of drawings and paintings by Thomas and William Daniell, who toured India extensively in the 1780s and 1790s.",
+        "The Angel of Victory, a 16 ft bronze statue, stands atop the central dome of the memorial.",
+        "The gardens of the Victoria Memorial were designed by Lord Redesdale and Sir David Prain."
+      ],
+      "visitorInfo": {
+        "timings": "10:00 AM to 5:00 PM, closed on Mondays and National Holidays",
+        "entryFee": "₹30 for Indian citizens, ₹500 for foreign tourists",
+        "bestTimeToVisit": "October to March",
+        "nearestAirport": "Netaji Subhas Chandra Bose International Airport (16 km)",
+        "nearestRailway": "Howrah Railway Station (7 km)"
+      },
+      "coordinates": {
+        "latitude": "22.5448",
+        "longitude": "88.3426"
+      },
+      "nearbyAttractions": [
+        {
+          "name": "St. Paul's Cathedral",
+          "distance": "0.5 km",
+          "slug": "st-pauls-cathedral"
+        },
+        {
+          "name": "Birla Planetarium",
+          "distance": "1 km",
+          "slug": "birla-planetarium"
+        },
+        {
+          "name": "Howrah Bridge",
+          "distance": "7 km",
+          "slug": "howrah-bridge"
+        }
+      ],
+      "slug": "victoria-memorial"
+    },
+    "taj-mahal": {
+      "name": "Taj Mahal",
+      "location": "Agra, Uttar Pradesh",
+      "period": "1632-1653 CE",
+      "description": "Iconic white marble mausoleum built by Emperor Shah Jahan in memory of his beloved wife Mumtaz Mahal.",
+      "fullDescription": [
+        "The Taj Mahal is an ivory-white marble mausoleum on the right bank of the Yamuna river in the Indian city of Agra. It was commissioned in 1632 by the Mughal emperor Shah Jahan to house the tomb of his favorite wife, Mumtaz Mahal; it also houses the tomb of Shah Jahan himself.",
+        "The Taj Mahal was designated as a UNESCO World Heritage Site in 1983 for being 'the jewel of Muslim art in India and one of the universally admired masterpieces of the world's heritage'. It is regarded by many as the best example of Mughal architecture and a symbol of India's rich history.",
+        "The Taj Mahal incorporates and expands on design traditions of Indo-Islamic and earlier Mughal architecture. Specific inspiration came from successful Timurid and Mughal buildings including the Gur-e Amir (the tomb of Timur, progenitor of the Mughal dynasty)."
+      ],
+      "images": [
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600"
+      ],
+      "facts": [
+        "The construction of the Taj Mahal complex took approximately 22 years to complete.",
+        "Over 20,000 artisans worked to complete the Taj Mahal, under the guidance of a board of architects led by the court architect Ustad Ahmad Lahauri.",
+        "The Taj Mahal's white marble changes color subtly with the light - appearing pinkish in the morning, milky white in the evening, and golden when lit by moonlight.",
+        "The four minarets surrounding the main dome were built slightly outward so that in the event of an earthquake, they would fall away from the tomb rather than on it."
+      ],
+      "visitorInfo": {
+        "timings": "Sunrise to sunset (closed on Fridays for prayers)",
+        "entryFee": "₹50 for Indian citizens, ₹1,100 for foreign tourists",
+        "bestTimeToVisit": "October to March",
+        "nearestAirport": "Agra Airport (7 km)",
+        "nearestRailway": "Agra Cantt Railway Station (6 km)"
+      },
+      "coordinates": {
+        "latitude": "27.1751",
+        "longitude": "78.0421"
+      },
+      "nearbyAttractions": [
+        {
+          "name": "Agra Fort",
+          "distance": "2.5 km",
+          "slug": "agra-fort"
+        },
+        {
+          "name": "Fatehpur Sikri",
+          "distance": "40 km",
+          "slug": "fatehpur-sikri"
+        },
+        {
+          "name": "Mehtab Bagh",
+          "distance": "1 km",
+          "slug": "mehtab-bagh"
+        }
+      ],
+      "slug": "taj-mahal"
+    },
+    "red-fort": {
+      "name": "Red Fort",
+      "location": "New Delhi",
+      "period": "1638-1648 CE",
+      "description": "Historic fortress built by Mughal Emperor Shah Jahan when he moved his capital from Agra to Delhi.",
+      "fullDescription": [
+        "The Red Fort is a historic fort in the city of Delhi in India. It was the main residence of the emperors of the Mughal dynasty for nearly 200 years, until 1857. It is located in the center of Delhi and houses a number of museums.",
+        "In addition to accommodating the emperors and their households, it was the ceremonial and political center of the Mughal state and the setting for events critically impacting the region. It was designated a UNESCO World Heritage Site in 2007.",
+        "The fort's massive red sandstone walls, which stand 75 feet (23 m) high, enclose a complex of palaces and entertainment halls, projecting balconies, baths and indoor canals, and geometrical gardens, as well as an ornate mosque."
+      ],
+      "images": [
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600",
+        "/api/placeholder/800/600"
+      ],
+      "facts": [
+        "The Red Fort derives its name from the massive red sandstone walls that surround the entire fort complex.",
+        "The fort was looted and a lot of its precious items were destroyed during the Indian rebellion of 1857 against the British.",
+        "Every year on Independence Day (15 August), the Prime Minister of India hoists the national flag at the Red Fort and delivers a nationally broadcast speech from its ramparts.",
+        "The fort has two main gateways – the Lahori Gate and the Delhi Gate, with the Lahori Gate being the main entrance to the fort."
+      ],
+      "visitorInfo": {
+        "timings": "9:30 AM to 4:30 PM, closed on Mondays",
+        "entryFee": "₹35 for Indian citizens, ₹500 for foreign tourists",
+        "bestTimeToVisit": "October to March",
+        "nearestAirport": "Indira Gandhi International Airport (25 km)",
+        "nearestRailway": "New Delhi Railway Station (6 km)"
+      },
+      "coordinates": {
+        "latitude": "28.6562",
+        "longitude": "77.2410"
+      },
+      "nearbyAttractions": [
+        {
+          "name": "Jama Masjid",
+          "distance": "1 km",
+          "slug": "jama-masjid"
+        },
+        {
+          "name": "Chandni Chowk",
+          "distance": "0.5 km",
+          "slug": "chandni-chowk"
+        },
+        {
+          "name": "India Gate",
+          "distance": "6 km",
+          "slug": "india-gate"
+        }
+      ],
+      "slug": "red-fort"
+    }
+  }
+}
