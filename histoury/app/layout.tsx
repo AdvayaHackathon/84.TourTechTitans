@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footert";
 import { AuthProvider } from "@/app/context/AuthContext";
+import LanguageSwitcher from "@/components/LanguageSwitcher"; // ✅ added import
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +24,10 @@ export default function RootLayout({
         className={`${inter.className} min-h-screen flex flex-col bg-amber-50`}
       >
         <AuthProvider>
+          {/* Optional: Add styling or positioning container */}
+          <div className="absolute top-2 right-40 z-50">
+            <LanguageSwitcher />
+          </div>
           <Header />
           <main className="flex-grow">{children}</main>
           <Footer />

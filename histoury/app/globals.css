@@ -24,3 +24,13 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Hide Google Translate top banner */
+/* .skiptranslate {
+  display: none !important;
+} */
+
+/* Also reset body's top margin if it's added by Google */
+/* body {
+  top: 0 !important;
+} */

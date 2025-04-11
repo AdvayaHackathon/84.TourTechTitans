@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/app/context/AuthContext";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -52,7 +53,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden md:flex items-center space-x-8">
             <Link
               href="/"
               className="text-amber-900 hover:text-amber-700 font-medium"
@@ -79,8 +80,13 @@ export default function Header() {
             </Link>
           </nav>
 
-          {/* Sign In/Sign Out button */}
-          <div className="hidden md:flex">{renderAuthButton()}</div>
+          {/* Language Switcher and Auth Button on Desktop */}
+          <div className="hidden md:flex items-center space-x-4">
+            <div className="border-r border-amber-300 pr-4">
+              <LanguageSwitcher />
+            </div>
+            {renderAuthButton()}
+          </div>
 
           {/* Hamburger Icon */}
           <div className="md:hidden">
@@ -137,7 +143,20 @@ export default function Header() {
             >
               My Journey
             </Link>
-            <div className="inline-block">{renderAuthButton()}</div>
+
+            {/* Language Switcher in Mobile Menu */}
+            <div className="py-2 border-t border-amber-200">
+              <div className="mb-3">
+                <span className="text-amber-900 font-medium">
+                  Select Language:
+                </span>
+              </div>
+              <LanguageSwitcher />
+            </div>
+
+            <div className="pt-2 border-t border-amber-200">
+              {renderAuthButton()}
+            </div>
           </div>
         </div>
       </div>
