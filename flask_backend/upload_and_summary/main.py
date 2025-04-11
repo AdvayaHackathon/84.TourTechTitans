@@ -1,17 +1,24 @@
 from fastapi import FastAPI, UploadFile, Form
 from fastapi.responses import JSONResponse, FileResponse
+from fastapi.middleware.cors import CORSMiddleware
 import os
 import shutil
 
-from landmark_detection import (
-    detect_landmark_google_vision,
-    predict_landmark_custom_model
-)
+from landmark_detection import predict_landmark_custom_model
 from summary_generator import get_openai_summary, generate_audio_summary
 from places import find_nearby_places
 from map_generator import generate_leaflet_map_from_api_output
 
 app = FastAPI()
+
+# ✅ Enable CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Replace with ["http://localhost:3000"] in production
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -21,10 +28,6 @@ async def detect_landmark(image: UploadFile):
     file_path = os.path.join(UPLOAD_FOLDER, image.filename)
     with open(file_path, "wb") as buffer:
         shutil.copyfileobj(image.file, buffer)
-
-    vision_result = detect_landmark_google_vision(file_path)
-    if vision_result:
-        return vision_result
 
     predicted, lat, lng = predict_landmark_custom_model(file_path)
     return {"name": predicted, "lat": lat, "lng": lng}

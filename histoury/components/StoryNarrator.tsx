@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const languageMap: { [key: string]: string } = {
   english: "en",
@@ -19,6 +19,7 @@ export default function StoryNarrator({
   const [language, setLanguage] = useState("english");
   const [loading, setLoading] = useState(false);
   const [audioPath, setAudioPath] = useState<string | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const handleGenerate = async () => {
     if (!landmark) {
@@ -58,8 +59,19 @@ export default function StoryNarrator({
     }
   };
 
+  const handlePause = () => {
+    audioRef.current?.pause();
+  };
+
+  const handleStop = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+  };
+
   return (
-    <div className="mt-6 bg-white border border-amber-300 p-6 rounded-2xl shadow-lg text-amber-900 space-y-4 w-full max-w-3xl mx-auto">
+    <div className="mt-6 bg-white border border-amber-300 p-6 rounded-2xl shadow-lg text-amber-900 space-y-6 w-full max-w-3xl mx-auto">
       <h2 className="text-xl sm:text-2xl font-semibold text-center text-amber-800">
         📖 AI-Generated Story
       </h2>
@@ -73,7 +85,6 @@ export default function StoryNarrator({
 
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
         <select
-          aria-label="Select language for story narration"
           value={language}
           onChange={(e) => setLanguage(e.target.value)}
           className="w-full sm:w-auto px-4 py-2 rounded-xl border border-amber-300 bg-white text-amber-800 focus:outline-none focus:ring-2 focus:ring-amber-500"
@@ -93,26 +104,40 @@ export default function StoryNarrator({
           >
             ✍️ {loading ? "Generating..." : "Generate Story"}
           </button>
-
-          <button
-            onClick={handleSpeak}
-            className="bg-amber-700 hover:bg-amber-800 text-white font-semibold px-6 py-2 rounded-xl transition-all duration-200"
-          >
-            🔊 Speak
-          </button>
         </div>
       </div>
 
       {audioPath && (
-        <div className="text-center mt-4">
-          <a
-            href={`http://localhost:8000/download_audio/?path=${audioPath}`}
-            className="text-amber-700 underline"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            🔉 Download or play narration
-          </a>
+        <div className="mt-6 text-center space-y-4">
+          <audio
+            ref={audioRef}
+            controls
+            src={`http://localhost:8000/download_audio/?path=${encodeURIComponent(
+              audioPath
+            )}`}
+            className="w-full max-w-md mx-auto"
+          />
+
+          <div className="flex flex-wrap justify-center gap-4">
+            <button
+              onClick={() => audioRef.current?.play()}
+              className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-4 py-2 rounded-xl"
+            >
+              ▶️ Play
+            </button>
+            <button
+              onClick={handlePause}
+              className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-4 py-2 rounded-xl"
+            >
+              ⏸️ Pause
+            </button>
+            <button
+              onClick={handleStop}
+              className="bg-red-600 hover:bg-red-700 text-white font-semibold px-4 py-2 rounded-xl"
+            >
+              ⏹️ Stop
+            </button>
+          </div>
         </div>
       )}
     </div>
