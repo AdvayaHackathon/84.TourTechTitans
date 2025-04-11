@@ -1,34 +1,11 @@
-// ExplorePage.tsx
+// app/explore/page.tsx
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 
-const SearchBar = () => {
-  return (
-    <div className="w-full max-w-2xl">
-      <div className="relative">
-        <input
-          type="text"
-          placeholder="Search for historical sites, cities, or monuments..."
-          className="w-full p-4 pl-12 rounded-full border-2 border-amber-300 focus:border-amber-500 focus:outline-none shadow-md"
-        />
-        <div className="absolute inset-y-0 left-0 pl-4 flex items-center">
-          <svg
-            className="h-5 w-5 text-amber-600"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
-        </div>
-      </div>
-    </div>
-  );
-};
+// Import the SearchBar component with no SSR
+const SearchBar = dynamic(() => import("./SearchBar"));
 
 interface SiteCardProps {
   name: string;
@@ -90,7 +67,6 @@ const SiteCard: React.FC<SiteCardProps> = ({
   );
 };
 
-// Rest of the file remains unchanged...
 const SuggestedSection = () => {
   const suggestedSites = [
     {
@@ -223,7 +199,7 @@ const TrendingSection = () => {
   );
 };
 
-const ExplorePage: React.FC = () => {
+const ExplorePage = () => {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
