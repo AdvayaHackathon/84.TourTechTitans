@@ -73,6 +73,7 @@ export default function StoryNarrator({
 
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
         <select
+          aria-label="Select language for story narration"
           value={language}
           onChange={(e) => setLanguage(e.target.value)}
           className="w-full sm:w-auto px-4 py-2 rounded-xl border border-amber-300 bg-white text-amber-800 focus:outline-none focus:ring-2 focus:ring-amber-500"
