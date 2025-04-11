@@ -57,9 +57,9 @@ def get_google_auth_url(request: Request):
     google_provider_cfg = get_google_provider_cfg()
     authorization_endpoint = google_provider_cfg["authorization_endpoint"]
     
-    # Create the request URL
-    base_url = str(request.base_url)
-    redirect_uri = f"{base_url}auth/login/callback"
+    # Create the request URL - Correctly build the base URL from request components
+    base_url = f"{request.url.scheme}://{request.url.netloc}"
+    redirect_uri = f"{base_url}/auth/login/callback"
     
     # Build authorization URL
     request_uri = f"{authorization_endpoint}?response_type=code&client_id={os.getenv('GOOGLE_CLIENT_ID')}&redirect_uri={redirect_uri}&scope=openid%20email%20profile"
@@ -76,8 +76,9 @@ def process_google_callback(request: Request):
     
     # Prepare token request
     token_url = token_endpoint
-    base_url = str(request.base_url)
-    redirect_uri = f"{base_url}auth/login/callback"
+    # Fix base URL construction
+    base_url = f"{request.url.scheme}://{request.url.netloc}"
+    redirect_uri = f"{base_url}/auth/login/callback"
     
     data = {
         'code': code,
@@ -257,4 +258,4 @@ async def generate_map(lat: float, lng: float):
 # Run the application  
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True) 
+    uvicorn.run("main:app", host="0.0.0.0", port=5000, reload=True) 

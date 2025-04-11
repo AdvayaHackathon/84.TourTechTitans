@@ -11,3 +11,6 @@ class Config:
     SUPABASE_KEY = os.getenv('SUPABASE_KEY')
     FRONTEND_URL = os.getenv('FRONTEND_URL')
     GOOGLE_DISCOVERY_URL = "https://accounts.google.com/.well-known/openid-configuration"
+
+# Export individual variables for direct import
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
