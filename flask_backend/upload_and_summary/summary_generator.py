@@ -3,9 +3,10 @@ import openai
 from gtts import gTTS
 # Remove import from config and get directly from env
 # from config import OPENAI_API_KEY
+from config import OPENAI_API_KEY
 
 # Set API key from environment variable
-openai.api_key = os.getenv('OPENAI_API_KEY')
+openai.api_key = OPENAI_API_KEY
 
 # Generate summary via OpenAI Chat
 def get_openai_summary(landmark, language='en'):
