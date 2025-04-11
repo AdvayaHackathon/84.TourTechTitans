@@ -14,7 +14,6 @@ export default function ScanUploader({
   const fileInputRef = useRef<HTMLInputElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [landmark, setLandmark] = useState<string | null>(null);
   const [coords, setCoords] = useState<{ lat: number; lng: number } | null>(
     null
@@ -42,7 +41,6 @@ export default function ScanUploader({
   }, [showCamera, stream]);
 
   const handleFile = (file: File) => {
-    setSelectedFile(file);
     const reader = new FileReader();
     reader.onloadend = () => {
       setPreviewUrl(reader.result as string);
@@ -171,6 +169,17 @@ export default function ScanUploader({
       const imageDataUrl = canvas.toDataURL("image/jpeg");
       setPreviewUrl(imageDataUrl);
 
+      // Convert data URL to File object
+      canvas.toBlob((blob) => {
+        if (blob) {
+          const file = new File([blob], "captured-image.jpg", {
+            type: "image/jpeg",
+          });
+          // Upload the captured image to backend
+          uploadToBackend(file);
+        }
+      }, "image/jpeg");
+
       // Stop the camera after capture
       stopCamera();
     }
@@ -178,17 +187,19 @@ export default function ScanUploader({
 
   const uploadImage = () => {
     if (previewUrl) {
-      // Implement your actual upload logic here
-      console.log("Uploading image:", previewUrl.substring(0, 50) + "...");
-
-      // Example of how you might upload the image
-      // fetch('/api/upload', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({ imageData: previewUrl })
-      // });
-
-      alert("Image uploaded successfully!");
+      // Convert dataURL to a File for upload
+      fetch(previewUrl)
+        .then((res) => res.blob())
+        .then((blob) => {
+          const file = new File([blob], "uploaded-image.jpg", {
+            type: "image/jpeg",
+          });
+          uploadToBackend(file);
+        })
+        .catch((err) => {
+          console.error("Error processing image:", err);
+          alert("Error processing image. Please try again.");
+        });
     }
   };
 
