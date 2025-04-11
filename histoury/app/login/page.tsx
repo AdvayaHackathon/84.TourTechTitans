@@ -19,12 +19,14 @@ export default function Login() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
-      <h1 className="text-3xl mb-8">Welcome to Tourism Explorer</h1>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-amber-50 px-4">
+      <h1 className="text-4xl font-bold text-amber-800 mb-8 text-center">
+        Welcome to Histoury
+      </h1>
 
       <button
         onClick={handleGoogleLogin}
-        className="flex items-center gap-2 bg-white text-gray-800 px-4 py-2 rounded-md shadow-md hover:shadow-lg transition-all"
+        className="flex items-center gap-3 bg-white text-amber-900 font-semibold px-6 py-3 rounded-xl shadow hover:shadow-lg transition duration-300 border border-amber-200 hover:border-amber-400"
       >
         <svg width="20" height="20" viewBox="0 0 24 24">
           <path

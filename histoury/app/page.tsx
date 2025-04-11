@@ -5,10 +5,11 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-amber-200 to-amber-100 py-20">
+      <section className="bg-gradient-to-r from-amber-200 to-amber-100 py-12 md:py-20">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center">
-            <div className="md:w-1/2 mb-10 md:mb-0">
+            {/* Text Content */}
+            <div className="w-full md:w-1/2 mb-10 md:mb-0 text-center md:text-left">
               <h1 className="text-4xl md:text-5xl font-bold text-amber-900 mb-6">
                 Discover the Stories That Shaped Our World
               </h1>
@@ -17,7 +18,7 @@ export default function Home() {
                 through immersive storytelling, interactive timelines, and
                 captivating insights.
               </p>
-              <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+              <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center md:justify-start">
                 <Link
                   href="/scan"
                   className="bg-amber-700 hover:bg-amber-800 text-white font-bold py-3 px-6 rounded-lg transition duration-300 text-center"
@@ -32,14 +33,16 @@ export default function Home() {
                 </Link>
               </div>
             </div>
-            <div className="md:w-1/2 relative">
-              <div className="relative h-80 md:h-96 w-full rounded-lg overflow-hidden shadow-xl">
+
+            {/* Image - Appears below on mobile, beside on desktop */}
+            <div className="w-full md:w-1/2 relative">
+              <div className="relative w-full aspect-[4/3] md:aspect-[16/9] rounded-lg overflow-hidden shadow-xl">
                 <Image
                   src="/heroImage.png"
                   alt="Historical artifacts and documents"
-                  layout="fill"
-                  objectFit="cover"
-                  className="rounded-lg"
+                  fill
+                  className="object-cover"
+                  priority
                 />
               </div>
             </div>
@@ -51,7 +54,7 @@ export default function Home() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center text-amber-900 mb-12">
-            Explore History Like Never Before
+            Discover Stories Behind Every Landmark
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-amber-50 p-6 rounded-lg shadow-md">
@@ -72,12 +75,11 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="text-xl font-semibold text-amber-800 text-center mb-2">
-                Interactive Timelines
+                Instant Recognition
               </h3>
               <p className="text-amber-700 text-center">
-                Navigate through centuries with our intuitive timeline
-                interface. Zoom in and out to discover connections between
-                events.
+                Upload or capture images of monuments to instantly identify them
+                and unlock immersive historical insights.
               </p>
             </div>
 
@@ -99,11 +101,11 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="text-xl font-semibold text-amber-800 text-center mb-2">
-                Regional Histories
+                Multilingual Stories
               </h3>
               <p className="text-amber-700 text-center">
-                Explore the unique histories of different regions and cultures
-                around the world, from ancient civilizations to modern nations.
+                Experience cultural stories in your native language through
+                dynamic translations and narration options.
               </p>
             </div>
 
@@ -125,11 +127,11 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="text-xl font-semibold text-amber-800 text-center mb-2">
-                Curated Collections
+                AI-Powered Narration
               </h3>
               <p className="text-amber-700 text-center">
-                Dive into thematic collections of historical events, figures,
-                and artifacts, carefully curated by historians and experts.
+                Let AI read the story aloud as you explore, enhancing
+                accessibility and making history come alive on-site.
               </p>
             </div>
           </div>
@@ -218,7 +220,7 @@ export default function Home() {
                   Timeless Cities to Visit
                 </h3>
                 <p className="text-amber-700 mb-4">
-                  Travel back in time with our guide to the world’s most
+                  Travel back in time with our guide to the world's most
                   historically rich cities.
                 </p>
                 <Link
