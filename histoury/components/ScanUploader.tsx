@@ -3,11 +3,7 @@
 import { useRef, useState, DragEvent, ChangeEvent, useEffect } from "react";
 import Image from "next/image";
 
-export default function ScanUploader({
-  onDetect,
-}: {
-  onDetect: (landmark: string, coords: { lat: number; lng: number }) => void;
-}) {
+export default function ScanUploader() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -39,42 +35,11 @@ export default function ScanUploader({
   }, [showCamera, stream]);
 
   const handleFile = (file: File) => {
-    setSelectedFile(file);
     const reader = new FileReader();
     reader.onloadend = () => {
       setPreviewUrl(reader.result as string);
     };
     reader.readAsDataURL(file);
-    uploadToBackend(file);
-  };
-
-  const uploadToBackend = async (file: File) => {
-    setLoading(true);
-    const formData = new FormData();
-    formData.append("image", file);
-
-    try {
-      const res = await fetch("http://localhost:8000/detect_landmark/", {
-        method: "POST",
-        body: formData,
-      });
-
-      const data = await res.json();
-      if (data.name && data.lat && data.lng) {
-        setLandmark(data.name);
-        const coordData = { lat: data.lat, lng: data.lng };
-        setCoords(coordData);
-        onDetect(data.name, coordData); // Pass to parent
-      } else {
-        setLandmark("Could not detect landmark");
-        setCoords(null);
-      }
-    } catch (err) {
-      console.error("Upload error:", err);
-      setLandmark("Error contacting backend");
-    } finally {
-      setLoading(false);
-    }
   };
 
   const handleDrop = (e: DragEvent<HTMLDivElement>) => {
@@ -306,6 +271,16 @@ export default function ScanUploader({
               Latitude: {coords.lat}, Longitude: {coords.lng}
             </p>
           )}
+      {/* Camera Button - Only show when not already using camera */}
+      {!showCamera && !previewUrl && (
+        <div className="mt-6 text-center">
+          <button
+            onClick={startCamera}
+            className="flex items-center gap-2 mx-auto text-amber-700 hover:text-amber-900 underline"
+          >
+            <Camera size={18} />
+            Or click a photo using your camera
+          </button>
         </div>
       )}
     </div>
