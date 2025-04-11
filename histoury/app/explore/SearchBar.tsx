@@ -1,5 +1,4 @@
-"use client";
-
+"use client"
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -159,6 +158,9 @@ const SearchBar = () => {
   const [isSearching, setIsSearching] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  
+  // The minimum number of characters required before searching
+  const MIN_SEARCH_LENGTH = 3;
 
   // Handle click outside to close results
   useEffect(() => {
@@ -174,16 +176,14 @@ const SearchBar = () => {
     };
   }, []);
 
-  // Calculate relevance score for sorting
-  const getRelevanceScore = (site: typeof allSites[0], searchTerm: string) => {
+  // Calculate relevance score based ONLY on name
+  const getNameRelevanceScore = (site: typeof allSites[0], searchTerm: string) => {
     const lowerSearchTerm = searchTerm.toLowerCase();
     const lowerName = site.name.toLowerCase();
-    const lowerLocation = site.location.toLowerCase();
-    const lowerDescription = site.description.toLowerCase();
     
     let score = 0;
     
-    // Exact matches in name get highest priority
+    // Exact name match
     if (lowerName === lowerSearchTerm) {
       score += 100;
     } 
@@ -200,32 +200,17 @@ const SearchBar = () => {
       score += 60;
     }
     
-    // Location matches
-    if (lowerLocation === lowerSearchTerm) {
-      score += 50;
-    } 
-    else if (lowerLocation.startsWith(lowerSearchTerm)) {
-      score += 40;
-    }
-    else if (lowerLocation.includes(lowerSearchTerm)) {
-      score += 30;
-    }
-    
-    // Description matches (lower priority)
-    if (lowerDescription.includes(lowerSearchTerm)) {
-      score += 20;
-    }
-    
     // Boost score for shorter name length (more specific matches)
     score += (20 - Math.min(20, lowerName.length)) / 2;
     
     return score;
   };
 
-  // Enhanced search function with relevance sorting
+  // Simple search function that ONLY checks name
   const searchSites = (term: string) => {
-    if (term.trim() === "") {
+    if (term.trim() === "" || term.trim().length < MIN_SEARCH_LENGTH) {
       setResults([]);
+      setIsSearching(false);
       return;
     }
 
@@ -235,18 +220,15 @@ const SearchBar = () => {
     setTimeout(() => {
       const lowerCaseTerm = term.toLowerCase();
       
-      // Filter sites that match the search term
+      // Only filter based on name
       const matchedResults = allSites.filter(site => 
-        site.name.toLowerCase().includes(lowerCaseTerm) || 
-        site.location.toLowerCase().includes(lowerCaseTerm) || 
-        site.description.toLowerCase().includes(lowerCaseTerm) ||
-        site.slug.toLowerCase().includes(lowerCaseTerm)
+        site.name.toLowerCase().includes(lowerCaseTerm)
       );
       
-      // Sort by relevance score
+      // Sort by relevance score (still based only on name)
       const sortedResults = matchedResults.sort((a, b) => {
-        const scoreA = getRelevanceScore(a, term);
-        const scoreB = getRelevanceScore(b, term);
+        const scoreA = getNameRelevanceScore(a, term);
+        const scoreB = getNameRelevanceScore(b, term);
         return scoreB - scoreA; // Higher score first
       });
       
@@ -264,12 +246,17 @@ const SearchBar = () => {
 
   // Call debounced search when search term changes
   useEffect(() => {
-    if (searchTerm.trim()) {
+    if (searchTerm.trim().length >= MIN_SEARCH_LENGTH) {
       setIsSearching(true);
       debouncedSearch(searchTerm);
+      setShowResults(true);
     } else {
       setResults([]);
       setIsSearching(false);
+      // Keep dropdown open for UX feedback but clear results
+      if (searchTerm.trim().length > 0) {
+        setShowResults(true);
+      }
     }
     
     return () => {
@@ -279,6 +266,7 @@ const SearchBar = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
+    // We'll show the results container even with < 3 chars, just to provide feedback
     setShowResults(true);
   };
 
@@ -294,14 +282,17 @@ const SearchBar = () => {
     setSearchTerm("");
   };
 
+  // Check if search term is too short to trigger search
+  
+
   return (
     <div className="w-full max-w-2xl relative" ref={searchRef}>
       <div className="relative">
         <input
           ref={inputRef}
           type="text"
-          placeholder="Search for historical sites, cities, or monuments..."
-          className="w-full p-4 pl-12 rounded-full border-2 text-black border-black focus:border-black focus:outline-none shadow-md transition-all duration-200"
+          placeholder="Search for historical sites by name..."
+          className="w-full p-4 pl-12 rounded-full border-2 border-amber-300 focus:border-amber-500 focus:outline-none shadow-md transition-all duration-200"
           value={searchTerm}
           onChange={handleInputChange}
           onClick={() => setShowResults(true)}
@@ -309,7 +300,7 @@ const SearchBar = () => {
         />
         <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
           <svg
-            className={`h-5 w-5 ${isSearching ? 'text-black animate-pulse' : 'text-black'}`}
+            className={`h-5 w-5 ${isSearching ? 'text-amber-400 animate-pulse' : 'text-amber-600'}`}
             fill="none"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -338,7 +329,10 @@ const SearchBar = () => {
       {/* Search Results Dropdown with improved styling and loading state */}
       {showResults && (
         <div className="absolute z-10 mt-2 w-full bg-white rounded-lg shadow-lg border border-amber-200 overflow-hidden max-h-96 overflow-y-auto transition-all duration-200">
-          {isSearching && (
+          {/* Show "Type at least 3 characters" message when input is too short */}
+         
+
+          {isSearching && searchTerm.length >= MIN_SEARCH_LENGTH && (
             <div className="p-4 text-center text-amber-700 flex items-center justify-center">
               <svg className="animate-spin h-5 w-5 mr-2 text-amber-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
@@ -348,7 +342,7 @@ const SearchBar = () => {
             </div>
           )}
 
-          {!isSearching && results.length > 0 && (
+          {!isSearching && results.length > 0 && searchTerm.length >= MIN_SEARCH_LENGTH && (
             <>
               <div className="p-2 bg-amber-50 text-amber-700 text-sm font-medium border-b border-amber-200">
                 {results.length} {results.length === 1 ? 'result' : 'results'} found
@@ -364,7 +358,7 @@ const SearchBar = () => {
           )}
 
           {/* No results message */}
-          {!isSearching && searchTerm && results.length === 0 && (
+          {!isSearching && searchTerm.length >= MIN_SEARCH_LENGTH && results.length === 0 && (
             <div className="p-6 text-center flex flex-col items-center justify-center">
               <svg className="h-12 w-12 text-amber-300 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -374,12 +368,12 @@ const SearchBar = () => {
             </div>
           )}
           
-          {/* Popular searches */}
+          {/* Popular searches - show only when there's no search term */}
           {!searchTerm && showResults && (
             <div className="p-3">
               <div className="text-sm font-medium text-amber-700 mb-2">Popular Searches</div>
               <div className="flex flex-wrap gap-2">
-                {["Taj Mahal", "Temples", "Delhi", "Rajasthan", "Caves"].map((term, i) => (
+                {["Taj Mahal", "Temple", "Caves", "Palace", "Memorial"].map((term, i) => (
                   <button 
                     key={i}
                     className="px-3 py-1 bg-amber-100 text-amber-800 rounded-full text-sm hover:bg-amber-200 transition-colors"
