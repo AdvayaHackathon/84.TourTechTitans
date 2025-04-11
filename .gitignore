@@ -17,6 +17,7 @@ build/
 dist/
 
 # Misc
+flask_backend/.env
 .DS_Store
 *.pem
 .env

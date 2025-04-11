@@ -1,6 +1,6 @@
 import os
 import requests
-from utils import haversine_distance
+from upload_and_summary.utils import haversine_distance
 
 ICON_MAP = {
     "restaurant": "red",

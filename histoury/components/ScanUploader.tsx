@@ -2,7 +2,6 @@
 
 import { useRef, useState, DragEvent, ChangeEvent, useEffect } from "react";
 import Image from "next/image";
-import { Camera } from "lucide-react";
 
 export default function ScanUploader({
   onDetect,
@@ -14,18 +13,20 @@ export default function ScanUploader({
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [landmark, setLandmark] = useState<string | null>(null);
-  const [coords, setCoords] = useState<{ lat: number; lng: number } | null>(null);
+  const [coords, setCoords] = useState<{ lat: number; lng: number } | null>(
+    null
+  );
   const [loading, setLoading] = useState(false);
   const [dragging, setDragging] = useState(false);
   const [showCamera, setShowCamera] = useState(false);
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [cameraLoading, setCameraLoading] = useState(false);
-  
+
   // Clean up camera stream when component unmounts
   useEffect(() => {
     return () => {
       if (stream) {
-        stream.getTracks().forEach(track => track.stop());
+        stream.getTracks().forEach((track) => track.stop());
       }
     };
   }, [stream]);
@@ -104,30 +105,34 @@ export default function ScanUploader({
 
   const startCamera = async () => {
     setCameraLoading(true);
-    
+
     try {
       // First set up UI state
       setShowCamera(true);
-      
+
       // Then request camera access
-      const mediaStream = await navigator.mediaDevices.getUserMedia({ 
-        video: { 
+      const mediaStream = await navigator.mediaDevices.getUserMedia({
+        video: {
           facingMode: "environment",
           width: { ideal: 1280 },
-          height: { ideal: 720 }
-        } 
+          height: { ideal: 720 },
+        },
       });
-      
+
       setStream(mediaStream);
-      
+
       // Directly set the stream to video element
       if (videoRef.current) {
         videoRef.current.srcObject = mediaStream;
-        videoRef.current.play().catch(err => console.error("Error playing video:", err));
+        videoRef.current
+          .play()
+          .catch((err) => console.error("Error playing video:", err));
       }
     } catch (err) {
       console.error("Error accessing camera:", err);
-      alert("Could not access your camera. Please make sure you have granted camera permissions.");
+      alert(
+        "Could not access your camera. Please make sure you have granted camera permissions."
+      );
       setShowCamera(false);
     } finally {
       setCameraLoading(false);
@@ -136,7 +141,7 @@ export default function ScanUploader({
 
   const stopCamera = () => {
     if (stream) {
-      stream.getTracks().forEach(track => track.stop());
+      stream.getTracks().forEach((track) => track.stop());
       setStream(null);
     }
     setShowCamera(false);
@@ -144,25 +149,25 @@ export default function ScanUploader({
 
   const capturePhoto = () => {
     if (!videoRef.current || !stream) return;
-    
+
     // Create a canvas to capture the image
     const canvas = document.createElement("canvas");
     const videoElement = videoRef.current;
     const width = videoElement.videoWidth;
     const height = videoElement.videoHeight;
-    
+
     canvas.width = width;
     canvas.height = height;
-    
+
     // Draw the video frame to the canvas
     const context = canvas.getContext("2d");
     if (context) {
       context.drawImage(videoElement, 0, 0, width, height);
-      
+
       // Convert to data URL and set as preview
       const imageDataUrl = canvas.toDataURL("image/jpeg");
       setPreviewUrl(imageDataUrl);
-      
+
       // Stop the camera after capture
       stopCamera();
     }
@@ -172,14 +177,14 @@ export default function ScanUploader({
     if (previewUrl) {
       // Implement your actual upload logic here
       console.log("Uploading image:", previewUrl.substring(0, 50) + "...");
-      
+
       // Example of how you might upload the image
       // fetch('/api/upload', {
       //   method: 'POST',
       //   headers: { 'Content-Type': 'application/json' },
       //   body: JSON.stringify({ imageData: previewUrl })
       // });
-      
+
       alert("Image uploaded successfully!");
     }
   };
@@ -203,7 +208,9 @@ export default function ScanUploader({
           <div className="relative w-full flex flex-col items-center">
             {cameraLoading && (
               <div className="absolute inset-0 flex items-center justify-center bg-gray-100 bg-opacity-70 z-10 rounded">
-                <div className="text-amber-700 font-bold">Accessing camera...</div>
+                <div className="text-amber-700 font-bold">
+                  Accessing camera...
+                </div>
               </div>
             )}
             <video
@@ -285,7 +292,9 @@ export default function ScanUploader({
       </div>
 
       {loading && (
-        <p className="text-center mt-4 text-amber-600">🔍 Detecting landmark...</p>
+        <p className="text-center mt-4 text-amber-600">
+          🔍 Detecting landmark...
+        </p>
       )}
 
       {landmark && (
