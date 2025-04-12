@@ -76,6 +76,11 @@ export default function Footer() {
                   My Journey
                 </Link>
               </li>
+              <li>
+                <Link href="/chat" className="hover:text-white">
+                  AI Guide
+                </Link>
+              </li>
             </ul>
           </div>
 

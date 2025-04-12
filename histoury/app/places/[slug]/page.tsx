@@ -12,6 +12,7 @@ type Place = {
   period: string;
   description: string;
   fullDescription: string[];
+  imageSrc: string;
   images: string[];
   facts: string[];
   visitorInfo: {
@@ -75,7 +76,7 @@ export default async function PlaceDetailPage({
   }
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-amber-50">
       {/* Hero Section */}
       <section className="relative h-80 lg:h-96">
         <Image

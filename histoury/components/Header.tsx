@@ -78,6 +78,12 @@ export default function Header() {
             >
               My Journey
             </Link>
+            <Link
+              href="/chat"
+              className="text-amber-900 hover:text-amber-700 font-medium"
+            >
+              AI Guide
+            </Link>
           </nav>
 
           {/* Language Switcher and Auth Button on Desktop */}
@@ -142,6 +148,12 @@ export default function Header() {
               className="text-amber-900 hover:text-amber-700 font-medium"
             >
               My Journey
+            </Link>
+            <Link
+              href="/chat"
+              className="text-amber-900 hover:text-amber-700 font-medium"
+            >
+              AI Guide
             </Link>
 
             {/* Language Switcher in Mobile Menu */}
