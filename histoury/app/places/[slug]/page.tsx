@@ -78,15 +78,15 @@ export default async function PlaceDetailPage({
   return (
     <div className="flex flex-col min-h-screen bg-amber-50">
       {/* Hero Section */}
-      <section className="relative h-80 lg:h-96">
-        <Image
+      <section className="relative h-30 lg:h-35">
+        {/* <Image
           src={`/api/placeholder/1920/1080`}
           alt={place.name}
           fill
           className="object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent opacity-70"></div>
-        <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+        /> */}
+        <div className="absolute inset-0  opacity-70"></div>
+        <div className="absolute bottom-0 left-0 right-0 p-6 text-black">
           <div className="container mx-auto">
             <h1 className="text-4xl font-bold mb-2">{place.name}</h1>
             <div className="flex items-center mb-2">
