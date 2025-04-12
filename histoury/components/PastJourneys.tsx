@@ -19,10 +19,9 @@ const Marker = dynamic(
   () => import("react-leaflet").then((mod) => mod.Marker),
   { ssr: false }
 );
-const Popup = dynamic(
-  () => import("react-leaflet").then((mod) => mod.Popup),
-  { ssr: false }
-);
+const Popup = dynamic(() => import("react-leaflet").then((mod) => mod.Popup), {
+  ssr: false,
+});
 const ZoomControl = dynamic(
   () => import("react-leaflet").then((mod) => mod.ZoomControl),
   { ssr: false }
@@ -46,38 +45,63 @@ interface Journey {
 // Component to fit map bounds to all markers
 function FitBoundsToMarkers({ positions }: { positions: [number, number][] }) {
   const map = useMap();
-  
+
   useEffect(() => {
     if (positions.length > 0) {
-      // Create bounds from all marker positions
-      const bounds = positions.reduce((bounds, position) => {
-        return bounds.extend(position);
-      }, map.getBounds());
-      
-      // Fit the map to these bounds with some padding
-      map.fitBounds(bounds, { padding: [50, 50] });
+      try {
+        // Create bounds from all marker positions
+        const L = window.L;
+        let bounds;
+
+        if (positions.length === 1) {
+          // For a single marker, center on it with a reasonable zoom
+          map.setView(positions[0], 10, { animate: true });
+          return;
+        } else {
+          // For multiple markers, fit bounds with padding
+          bounds = L.latLngBounds(positions);
+
+          // Add 15% padding around the bounds for better visual
+          map.fitBounds(bounds, {
+            padding: [60, 60],
+            maxZoom: 12, // Don't zoom in too far
+            animate: true,
+          });
+        }
+      } catch (error) {
+        console.error("Error fitting map to bounds:", error);
+        // Fallback to a reasonable default view
+        map.setView([30, 0], 2);
+      }
     }
   }, [map, positions]);
-  
+
   return null;
 }
 
 // Active journey indicator component
-function ActiveJourneyHighlight({ activeId, journeys }: { activeId: string | null, journeys: Journey[] }) {
+function ActiveJourneyHighlight({
+  activeId,
+  journeys,
+}: {
+  activeId: string | null;
+  journeys: Journey[];
+}) {
   const map = useMap();
-  
+
   useEffect(() => {
     if (activeId) {
-      const journey = journeys.find(j => j.journey_id === activeId);
+      const journey = journeys.find((j) => j.journey_id === activeId);
       if (journey) {
-        map.setView([journey.lat, journey.lng], 14, {
+        map.setView([journey.lat, journey.lng], 10, {
           animate: true,
-          duration: 1
+          duration: 1.2,
+          easeLinearity: 0.25,
         });
       }
     }
   }, [activeId, journeys, map]);
-  
+
   return null;
 }
 
@@ -86,7 +110,9 @@ export default function PastJourneys() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [mapReady, setMapReady] = useState(false);
-  const [mapStyle, setMapStyle] = useState<"standard" | "satellite" | "terrain">("standard");
+  const [mapStyle, setMapStyle] = useState<
+    "standard" | "satellite" | "terrain"
+  >("standard");
   const [activeJourney, setActiveJourney] = useState<string | null>(null);
   const [sortOrder, setSortOrder] = useState<"newest" | "oldest">("newest");
 
@@ -96,14 +122,18 @@ export default function PastJourneys() {
         setLoading(true);
         const loadingToast = toast.loading("Loading your journey history...");
         const journeysData = await getUserJourneysHistory();
-        
+
         // Ensure we have an array and sort by date
         const journeyArray = Array.isArray(journeysData) ? journeysData : [];
         setJourneys(journeyArray);
-        
+
         toast.dismiss(loadingToast);
         if (journeyArray.length > 0) {
-          toast.success(`Loaded ${journeyArray.length} past ${journeyArray.length === 1 ? 'journey' : 'journeys'}`);
+          toast.success(
+            `Loaded ${journeyArray.length} past ${
+              journeyArray.length === 1 ? "journey" : "journeys"
+            }`
+          );
         }
       } catch (err) {
         console.error("Error fetching journeys:", err);
@@ -119,21 +149,60 @@ export default function PastJourneys() {
 
   // Set up Leaflet when component mounts
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       setMapReady(true);
-      
-      // Custom red marker setup
-      import('leaflet').then(L => {
+
+      // Custom styled marker setup
+      import("leaflet").then((L) => {
         delete L.Icon.Default.prototype._getIconUrl;
-        
-        L.Icon.Default.mergeOptions({
-          iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
-          iconSize: [25, 41],
-          iconAnchor: [12, 41],
-          popupAnchor: [1, -34],
-          shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-          shadowSize: [41, 41]
+
+        // Create custom amber-colored marker icon that matches the site theme
+        const customIcon = new L.Icon({
+          iconUrl:
+            "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png",
+          iconSize: [30, 45], // Make it slightly larger
+          iconAnchor: [15, 45],
+          popupAnchor: [1, -40],
+          shadowUrl:
+            "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
+          shadowSize: [41, 41],
+          shadowAnchor: [13, 41],
         });
+
+        // Set as default marker
+        L.Marker.prototype.options.icon = customIcon;
+
+        // Add custom styles to the map
+        const style = document.createElement("style");
+        style.textContent = `
+          .leaflet-popup-content-wrapper {
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+          }
+          .leaflet-popup-content {
+            margin: 10px 12px;
+            line-height: 1.5;
+          }
+          .leaflet-container {
+            font-family: 'Inter', sans-serif;
+          }
+          .leaflet-popup-tip {
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+          }
+          .leaflet-control-zoom {
+            border: none !important;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1) !important;
+          }
+          .leaflet-control-zoom a {
+            background-color: white !important;
+            color: #92400e !important;
+          }
+          .leaflet-control-zoom a:hover {
+            background-color: #fef3c7 !important;
+            color: #78350f !important;
+          }
+        `;
+        document.head.appendChild(style);
       });
     }
   }, []);
@@ -198,12 +267,26 @@ export default function PastJourneys() {
   });
 
   // Get marker positions for the map
-  const markerPositions: [number, number][] = journeys.map(journey => [journey.lat, journey.lng]);
-  
+  const markerPositions: [number, number][] = journeys.map((journey) => [
+    journey.lat,
+    journey.lng,
+  ]);
+
   // Create journey path coordinates in chronological order for polyline
   const journeyPath = [...journeys]
-    .sort((a, b) => new Date(a.start_date).getTime() - new Date(b.start_date).getTime())
-    .map(journey => [journey.lat, journey.lng] as [number, number]);
+    .sort(
+      (a, b) =>
+        new Date(a.start_date).getTime() - new Date(b.start_date).getTime()
+    )
+    .map((journey) => [journey.lat, journey.lng] as [number, number]);
+
+  // Function to calculate an appropriate zoom level based on the marker positions
+  const getAppropriateZoom = (positions: [number, number][]) => {
+    if (positions.length <= 1) return 10; // Single place
+    if (positions.length <= 3) return 4; // Few places
+    if (positions.length <= 8) return 3; // Several places
+    return 2; // Many places
+  };
 
   if (loading) {
     return (
@@ -234,24 +317,28 @@ export default function PastJourneys() {
 
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-amber-900">Past Journeys</h2>
-        
+
         <div className="flex space-x-2">
           {mapReady && journeys.length > 0 && (
             <>
-              <button 
+              <button
                 onClick={toggleSortOrder}
                 className="flex items-center space-x-1 text-amber-700 bg-amber-100 hover:bg-amber-200 transition px-3 py-2 rounded-lg"
               >
                 <Calendar size={16} />
-                <span className="text-sm font-medium">{sortOrder === "newest" ? "Newest First" : "Oldest First"}</span>
+                <span className="text-sm font-medium">
+                  {sortOrder === "newest" ? "Newest First" : "Oldest First"}
+                </span>
               </button>
-              
-              <button 
+
+              <button
                 onClick={cycleMapStyle}
                 className="flex items-center space-x-1 text-amber-700 bg-amber-100 hover:bg-amber-200 transition px-3 py-2 rounded-lg"
               >
                 <Layers size={16} />
-                <span className="text-sm font-medium capitalize">{mapStyle} View</span>
+                <span className="text-sm font-medium capitalize">
+                  {mapStyle} View
+                </span>
               </button>
             </>
           )}
@@ -273,84 +360,119 @@ export default function PastJourneys() {
           <div className="lg:col-span-2 bg-amber-50 rounded-lg overflow-hidden border border-amber-200 shadow-md h-[600px]">
             {mapReady && (
               <MapContainer
-                center={[0, 0]} // Initial center will be replaced by FitBoundsToMarkers
+                center={[30, 0]} // Better initial center
                 zoom={2}
                 style={{ height: "100%", width: "100%" }}
                 className="z-0"
                 zoomControl={false}
+                // Add some additional map options for better appearance
+                attributionControl={false} // Hide attribution by default
+                minZoom={2} // Prevent zooming out too far
+                maxBoundsViscosity={1.0} // Prevent dragging outside bounds
+                worldCopyJump={true} // Better handling of world wrapping
               >
                 <TileLayer
                   attribution={getMapAttribution()}
                   url={getMapTileUrl()}
                 />
-                
+
+                {/* Attribution in bottom right corner */}
+                <div
+                  className="leaflet-control leaflet-attribution-control"
+                  style={{
+                    position: "absolute",
+                    zIndex: 1000,
+                    bottom: "0",
+                    right: "0",
+                    fontSize: "10px",
+                    backgroundColor: "rgba(255,255,255,0.7)",
+                    padding: "0 5px",
+                  }}
+                >
+                  {getMapAttribution()}
+                </div>
+
                 {/* Connect the journeys with a line */}
                 {journeyPath.length > 1 && (
-                  <Polyline 
+                  <Polyline
                     positions={journeyPath}
-                    color="#f59e0b"
-                    weight={3}
-                    opacity={0.7}
-                    dashArray="10, 10"
+                    color="#b45309" // Amber 700 - deeper color for better visibility
+                    weight={3.5}
+                    opacity={0.85}
+                    dashArray="6, 10"
                   />
                 )}
-                
+
                 {/* Add markers for each journey */}
                 {journeys.map((journey) => (
-                  <Marker 
+                  <Marker
                     key={journey.journey_id}
                     position={[journey.lat, journey.lng]}
                     eventHandlers={{
-                      click: () => setActiveJourney(journey.journey_id)
+                      click: () => setActiveJourney(journey.journey_id),
                     }}
                   >
                     <Popup className="custom-popup">
-                      <div className="text-center p-1">
-                        <h3 className="font-bold text-amber-800">{journey.place_name}</h3>
-                        <p className="text-sm text-gray-600">{formatDate(journey.start_date)}</p>
+                      <div className="p-1">
+                        <h3 className="font-bold text-amber-800 border-b border-amber-200 pb-1 mb-2">
+                          {journey.place_name}
+                        </h3>
+                        <p className="text-sm text-amber-700 flex items-center mb-1">
+                          <Calendar size={12} className="mr-1 inline" />
+                          {formatDate(journey.start_date)}
+                          {journey.end_date &&
+                            journey.end_date !== journey.start_date && (
+                              <span className="ml-1">
+                                - {formatDate(journey.end_date)}
+                              </span>
+                            )}
+                        </p>
                         {journey.description && (
-                          <p className="text-xs mt-1 max-w-xs overflow-hidden text-ellipsis">
-                            {journey.description.length > 100 
-                              ? journey.description.substring(0, 100) + '...' 
-                              : journey.description}
+                          <p className="text-xs mt-1 max-w-xs text-gray-600 line-clamp-2 italic">
+                            "{journey.description}"
                           </p>
                         )}
                       </div>
                     </Popup>
                   </Marker>
                 ))}
-                
-                {/* Component to fit the map to all markers */}
+
+                {/* Update FitBoundsToMarkers to use a better algorithm */}
                 <FitBoundsToMarkers positions={markerPositions} />
-                
+
                 {/* Component to highlight active journey */}
-                <ActiveJourneyHighlight activeId={activeJourney} journeys={journeys} />
-                
+                <ActiveJourneyHighlight
+                  activeId={activeJourney}
+                  journeys={journeys}
+                />
+
                 <ZoomControl position="bottomright" />
               </MapContainer>
             )}
           </div>
-          
+
           {/* Journey List Container */}
           <div className="bg-amber-50 rounded-lg border border-amber-200 shadow-md p-4 max-h-[600px] overflow-y-auto">
             <h3 className="text-lg font-semibold text-amber-800 mb-4 sticky top-0 bg-amber-50 py-2 border-b border-amber-200">
               Your Travel Timeline
             </h3>
-            
+
             <div className="space-y-4">
               {sortedJourneys.map((journey) => (
                 <div
                   key={journey.journey_id}
-                  className={`border ${activeJourney === journey.journey_id 
-                    ? 'border-amber-500 bg-amber-100' 
-                    : 'border-amber-200 bg-white'} 
+                  className={`border ${
+                    activeJourney === journey.journey_id
+                      ? "border-amber-500 bg-amber-100"
+                      : "border-amber-200 bg-white"
+                  } 
                     rounded-lg p-3 cursor-pointer transition hover:shadow-md`}
                   onClick={() => setActiveJourney(journey.journey_id)}
                 >
                   <h4 className="font-medium text-amber-800">
                     {journey.place_name}
                   </h4>
-                  
+
                   <div className="flex items-center mt-2 text-amber-700 text-sm">
                     <Calendar size={14} className="mr-1" />
                     <span>

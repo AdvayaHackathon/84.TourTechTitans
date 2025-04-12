@@ -319,7 +319,7 @@ export default function PlanningSection() {
           Your Upcoming Plans
         </h2>
         <Link
-          href="/"
+          href="/explore"
           className="bg-amber-600 hover:bg-amber-700 text-white px-6 py-3 rounded-xl font-medium shadow-md hover:shadow-lg transition-all duration-300 flex items-center gap-2"
         >
           <svg
@@ -373,7 +373,7 @@ export default function PlanningSection() {
             personalized travel experience.
           </p>
           <Link
-            href="/"
+            href="/explore"
             className="bg-amber-600 text-white px-8 py-3 rounded-xl font-semibold hover:bg-amber-700 transition-all duration-300 shadow-md hover:shadow-lg inline-flex items-center gap-2"
           >
             <svg
