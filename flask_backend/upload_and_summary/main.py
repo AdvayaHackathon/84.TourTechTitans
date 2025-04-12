@@ -7,7 +7,8 @@ import shutil
 from landmark_detection import predict_landmark_custom_model
 from summary_generator import get_openai_summary, generate_audio_summary
 from places import find_nearby_places
-from map_generator import generate_leaflet_map_from_api_output
+from map_generator import generate_custom_leaflet_map_from_api_output
+from ask import router as ask_router
 
 app = FastAPI()
 
@@ -19,6 +20,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(ask_router)
 
 UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -55,4 +58,3 @@ async def generate_map(lat: float, lng: float):
     map_path = f"{UPLOAD_FOLDER}/leaflet_map.html"
     map_.save(map_path)
     return FileResponse(map_path) 
-
