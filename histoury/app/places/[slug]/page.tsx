@@ -162,8 +162,8 @@ export default async function PlaceDetailPage({
                   Historical Significance
                 </h2>
                 <div className="flex items-center mb-4">
-                  <Calendar size={20} className="text-amber-700 mr-2" />
-                  <span className="font-medium">Period: {place.period}</span>
+                  <Calendar size={20} className="text-black mr-2" />
+                  <span className=" text-black font-medium">Period: {place.period}</span>
                 </div>
                 <h3 className="text-lg font-semibold text-amber-800 mb-2">
                   Interesting Facts
@@ -176,19 +176,7 @@ export default async function PlaceDetailPage({
               </div>
 
               {/* Map */}
-              <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-                <h2 className="text-2xl font-bold text-amber-900 mb-4">
-                  Location
-                </h2>
-                <div className="relative h-64 rounded-lg overflow-hidden bg-gray-200">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-gray-600 font-medium">
-                      Map Location: {place.coordinates.latitude},{" "}
-                      {place.coordinates.longitude}
-                    </span>
-                  </div>
-                </div>
-              </div>
+              
             </div>
 
             {/* Right Column - Sidebar */}
@@ -262,22 +250,7 @@ export default async function PlaceDetailPage({
               </div>
 
               {/* Experience in VR/AR CTA */}
-              <div className="bg-gradient-to-r from-amber-700 to-amber-900 rounded-lg shadow-md p-6 mb-8 text-white">
-                <h2 className="text-xl font-bold mb-3">
-                  Experience in Virtual Reality
-                </h2>
-                <p className="mb-4">
-                  Download our mobile app to experience {place.name} in VR mode
-                  using your phone and a VR headset.
-                </p>
-                <Link
-                  href="/download-app"
-                  className="block w-full bg-white text-amber-800 font-medium py-2 px-4 rounded-md text-center transition-colors hover:bg-amber-100"
-                >
-                  Get the App
-                </Link>
-              </div>
-
+            
               {/* Nearby Attractions */}
               <div className="bg-white rounded-lg shadow-md p-6 mb-8">
                 <h2 className="text-xl font-bold text-amber-900 mb-4">
@@ -286,13 +259,8 @@ export default async function PlaceDetailPage({
                 <div className="space-y-4">
                   {place.nearbyAttractions.map((attraction, index) => (
                     <div key={index} className="flex items-center">
-                      <div className="w-12 h-12 relative rounded-md overflow-hidden mr-3">
-                        <Image
-                          src={`/api/placeholder/100/100`}
-                          alt={attraction.name}
-                          fill
-                          className="object-cover"
-                        />
+                      <div className="w-1 h-1 relative rounded-md overflow-hidden mr-3">
+                        
                       </div>
                       <div>
                         <h3 className="font-medium text-gray-800">
@@ -329,44 +297,7 @@ export default async function PlaceDetailPage({
       </section>
 
       {/* Related Destinations */}
-      <section className="py-8 bg-amber-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-2xl font-bold text-amber-900 mb-6">
-            You May Also Like
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {place.nearbyAttractions.map((attraction, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-              >
-                <div className="relative h-40">
-                  <Image
-                    src={`/api/placeholder/300/200`}
-                    alt={attraction.name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="p-4">
-                  <h3 className="font-bold text-amber-900 mb-1">
-                    {attraction.name}
-                  </h3>
-                  <p className="text-amber-700 text-sm mb-2">
-                    {attraction.distance} from here
-                  </p>
-                  <Link
-                    href={`/places/${attraction.slug}`}
-                    className="text-amber-600 hover:text-amber-800 text-sm font-medium"
-                  >
-                    Explore →
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      
     </div>
   );
 }
