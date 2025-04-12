@@ -7,7 +7,7 @@ import shutil
 from landmark_detection import predict_landmark_custom_model
 from summary_generator import get_openai_summary, generate_audio_summary
 from places import find_nearby_places
-from map_generator import generate_leaflet_map_from_api_output
+from map_generator import generate_custom_leaflet_map_from_api_output
 
 app = FastAPI()
 
@@ -51,7 +51,7 @@ async def nearby_places(lat: float, lng: float):
 @app.get("/generate_map/")
 async def generate_map(lat: float, lng: float):
     results = find_nearby_places(lat, lng)
-    map_ = generate_leaflet_map_from_api_output(results)
+    map_ = generate_custom_leaflet_map_from_api_output(results)
     map_path = f"{UPLOAD_FOLDER}/leaflet_map.html"
     map_.save(map_path)
     return FileResponse(map_path) 

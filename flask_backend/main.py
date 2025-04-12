@@ -22,7 +22,7 @@ from upload_and_summary.landmark_detection import (
 )
 from upload_and_summary.summary_generator import get_openai_summary, generate_audio_summary
 from upload_and_summary.places import find_nearby_places
-from upload_and_summary.map_generator import generate_leaflet_map_from_api_output
+from upload_and_summary.map_generator import generate_custom_leaflet_map_from_api_output
 
 # Load environment variables
 load_dotenv()
@@ -38,7 +38,7 @@ app = FastAPI(title="Tourism App API")
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[os.getenv('FRONTEND_URL')],
+    allow_origins=[os.getenv('FRONTEND_URL', '*')],  # Fallback to allow all if not set
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -250,10 +250,186 @@ async def nearby_places(lat: float, lng: float):
 @app.get("/generate_map/")
 async def generate_map(lat: float, lng: float):
     results = find_nearby_places(lat, lng)
-    map_ = generate_leaflet_map_from_api_output(results)
+    map_ = generate_custom_leaflet_map_from_api_output(results)
     map_path = f"{UPLOAD_FOLDER}/leaflet_map.html"
     map_.save(map_path)
     return FileResponse(map_path)
+
+# Trips endpoints
+@app.post("/trips")
+async def create_trip(request: Request, current_user: Dict = Depends(get_current_user)):
+    """Create a new trip for the user"""
+    try:
+        # Parse the request body
+        try:
+            body = await request.json()
+        except Exception as e:
+            print(f"Failed to parse request body: {str(e)}")
+            raise HTTPException(status_code=400, detail=f"Invalid request body: {str(e)}")
+        
+        # Validate required fields
+        required_fields = ["lat", "lng", "description", "place_name"]
+        missing_fields = [field for field in required_fields if field not in body]
+        if missing_fields:
+            raise HTTPException(status_code=400, detail=f"Missing required fields: {', '.join(missing_fields)}")
+        
+        # Create trip in database
+        new_trip = {
+            "trip_id": str(uuid.uuid4()),
+            "user_id": current_user["user_id"],
+            "lat": body["lat"],
+            "lng": body["lng"],
+            "description": body["description"],
+            "place_name": body["place_name"],
+            "start_date": body.get("start_date", datetime.now().isoformat()),
+            "end_date": body.get("end_date"),
+            "created_at": "now()"
+        }
+        
+        # Explicitly log the data for debugging
+        print(f"Creating trip with data: {new_trip}")
+        
+        try:
+            response = supabase.table('trips').insert(new_trip).execute()
+            if not response.data or len(response.data) == 0:
+                print(f"Supabase error: {response}")
+                raise HTTPException(status_code=500, detail="Failed to create trip in database")
+        except Exception as db_error:
+            print(f"Database error: {str(db_error)}")
+            raise HTTPException(status_code=500, detail=f"Database error: {str(db_error)}")
+            
+        return response.data[0]
+    except HTTPException:
+        # Re-raise HTTP exceptions to preserve status codes
+        raise
+    except Exception as e:
+        print(f"Error creating trip: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Server error: {str(e)}")
+
+@app.get("/trips")
+async def get_user_trips(current_user: Dict = Depends(get_current_user)):
+    """Get all trips for the current user"""
+    try:
+        # Log user info for debugging
+        print(f"Fetching trips for user: {current_user['user_id']}")
+        
+        response = supabase.table('trips').select('*').eq('user_id', current_user["user_id"]).order('created_at', desc=True).execute()
+        print(f"Found {len(response.data)} trips")
+        return response.data
+    except Exception as e:
+        print(f"Error fetching trips: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/trips/{trip_id}")
+async def get_trip_details(trip_id: str, current_user: Dict = Depends(get_current_user)):
+    """Get details of a specific trip"""
+    try:
+        # Verify the trip belongs to the user
+        response = supabase.table('trips').select('*').eq('trip_id', trip_id).eq('user_id', current_user["user_id"]).execute()
+        if len(response.data) == 0:
+            raise HTTPException(status_code=404, detail="Trip not found or does not belong to user")
+        
+        return response.data[0]
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.put("/trips/{trip_id}")
+async def update_trip(trip_id: str, request: Request, current_user: Dict = Depends(get_current_user)):
+    """Update a trip"""
+    try:
+        # Verify the trip belongs to the user
+        trip_response = supabase.table('trips').select('*').eq('trip_id', trip_id).eq('user_id', current_user["user_id"]).execute()
+        if len(trip_response.data) == 0:
+            raise HTTPException(status_code=404, detail="Trip not found or does not belong to user")
+        
+        # Parse the request body
+        body = await request.json()
+        
+        # Prepare update data
+        update_data = {}
+        allowed_fields = ["description", "start_date", "end_date", "place_name"]
+        for field in allowed_fields:
+            if field in body:
+                update_data[field] = body[field]
+                
+        if not update_data:
+            return trip_response.data[0]  # No updates to make
+            
+        # Add updated_at timestamp
+        update_data["updated_at"] = "now()"
+        
+        # Update the trip
+        response = supabase.table('trips').update(update_data).eq('trip_id', trip_id).execute()
+        return response.data[0]
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.delete("/trips/{trip_id}")
+async def delete_trip(trip_id: str, current_user: Dict = Depends(get_current_user)):
+    """Delete a trip"""
+    try:
+        # Verify the trip belongs to the user
+        trip_response = supabase.table('trips').select('*').eq('trip_id', trip_id).eq('user_id', current_user["user_id"]).execute()
+        if len(trip_response.data) == 0:
+            raise HTTPException(status_code=404, detail="Trip not found or does not belong to user")
+        
+        # Delete the trip
+        supabase.table('trips').delete().eq('trip_id', trip_id).execute()
+        
+        return {"message": "Trip deleted successfully"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/trips/{trip_id}/complete")
+async def complete_trip(trip_id: str, current_user: Dict = Depends(get_current_user)):
+    """Mark a trip as completed by moving it to journeys table"""
+    try:
+        # Verify the trip belongs to the user
+        trip_response = supabase.table('trips').select('*').eq('trip_id', trip_id).eq('user_id', current_user["user_id"]).execute()
+        if len(trip_response.data) == 0:
+            raise HTTPException(status_code=404, detail="Trip not found or does not belong to user")
+        
+        trip_data = trip_response.data[0]
+        
+        # Create a new journey record
+        journey_data = {
+            "journey_id": str(uuid.uuid4()),
+            "user_id": current_user["user_id"],
+            "lat": trip_data["lat"],
+            "lng": trip_data["lng"],
+            "description": trip_data["description"],
+            "place_name": trip_data["place_name"],
+            "start_date": trip_data["start_date"],
+            "end_date": trip_data["end_date"],
+            "created_at": "now()"
+        }
+        
+        # Insert into journeys table
+        journey_response = supabase.table('journeys').insert(journey_data).execute()
+        if not journey_response.data or len(journey_response.data) == 0:
+            raise HTTPException(status_code=500, detail="Failed to create journey record")
+            
+        # Delete the trip from trips table
+        supabase.table('trips').delete().eq('trip_id', trip_id).execute()
+        
+        return {"message": "Trip marked as completed and moved to journeys", "journey_id": journey_data["journey_id"]}
+    except Exception as e:
+        print(f"Error completing trip: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/journeys/history")
+async def get_journey_history(current_user: Dict = Depends(get_current_user)):
+    """Get all completed journeys for the current user"""
+    try:
+        # Log user info for debugging
+        print(f"Fetching journey history for user: {current_user['user_id']}")
+        
+        response = supabase.table('journeys').select('*').eq('user_id', current_user["user_id"]).order('created_at', desc=True).execute()
+        print(f"Found {len(response.data)} journeys")
+        return response.data
+    except Exception as e:
+        print(f"Error fetching journey history: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 # Run the application  
 if __name__ == "__main__":
