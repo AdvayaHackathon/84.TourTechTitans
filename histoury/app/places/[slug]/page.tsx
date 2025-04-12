@@ -11,6 +11,7 @@ type Place = {
   period: string;
   description: string;
   fullDescription: string[];
+  imageSrc: string;
   images: string[];
   facts: string[];
   visitorInfo: {
@@ -71,27 +72,20 @@ export default async function PlaceDetailPage({
   }
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-amber-50">
       {/* Hero Section */}
-      <section className="relative h-80 lg:h-96">
-        <Image
-          src={`/api/placeholder/1920/1080`}
-          alt={place.name}
-          fill
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent opacity-70"></div>
-        <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-          <div className="container mx-auto">
-            <h1 className="text-4xl font-bold mb-2">{place.name}</h1>
-            <div className="flex items-center mb-2">
-              <MapPin size={18} className="mr-1" />
-              <span>{place.location}</span>
-            </div>
-          </div>
-        </div>
-      </section>
+      <section className="  relative h-30 lg:h-35">
 
+  <div className="absolute bottom-0 left-0 right-0 p-6 text-black ">
+    <div className="container mx-auto">
+      <h1 className="text-4xl font-bold mb-2">{place.name}</h1>
+      <div className="flex items-center mb-2">
+        <MapPin size={18} className="mr-1" />
+        <span>{place.location}</span>
+      </div>
+    </div>
+  </div>
+</section>
       {/* Main Content */}
       <section className="py-8">
         <div className="container mx-auto px-4">
@@ -208,18 +202,7 @@ export default async function PlaceDetailPage({
               </div>
 
               {/* Experience in VR/AR CTA */}
-              <div className="bg-gradient-to-r from-amber-700 to-amber-900 rounded-lg shadow-md p-6 mb-8 text-white">
-                <h2 className="text-xl font-bold mb-3">Experience in Virtual Reality</h2>
-                <p className="mb-4">
-                  Download our mobile app to experience {place.name} in VR mode using your phone and a VR headset.
-                </p>
-                <Link
-                  href="/download-app"
-                  className="block w-full bg-white text-amber-800 font-medium py-2 px-4 rounded-md text-center transition-colors hover:bg-amber-100"
-                >
-                  Get the App
-                </Link>
-              </div>
+            
 
               {/* Nearby Attractions */}
               <div className="bg-white rounded-lg shadow-md p-6 mb-8">
@@ -269,35 +252,7 @@ export default async function PlaceDetailPage({
       </section>
 
       {/* Related Destinations */}
-      <section className="py-8 bg-amber-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-2xl font-bold text-amber-900 mb-6">You May Also Like</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {place.nearbyAttractions.map((attraction, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                <div className="relative h-40">
-                  <Image
-                    src={`/api/placeholder/300/200`}
-                    alt={attraction.name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="p-4">
-                  <h3 className="font-bold text-amber-900 mb-1">{attraction.name}</h3>
-                  <p className="text-amber-700 text-sm mb-2">{attraction.distance} from here</p>
-                  <Link
-                    href={`/places/${attraction.slug}`}
-                    className="text-amber-600 hover:text-amber-800 text-sm font-medium"
-                  >
-                    Explore →
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      
     </div>
   );
 }

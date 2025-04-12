@@ -18,6 +18,7 @@ interface SiteCardProps {
 const SiteCard: React.FC<SiteCardProps> = ({
   name,
   location,
+  imageSrc,
   description,
   slug,
 }) => {
@@ -26,7 +27,7 @@ const SiteCard: React.FC<SiteCardProps> = ({
       <div className="bg-amber-50 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow hover:translate-y-[-2px]">
         <div className="relative h-48">
           <Image
-            src={`/api/placeholder/400/300`}
+            src={imageSrc}
             alt={name}
             fill
             className="object-cover"
@@ -76,7 +77,7 @@ const SuggestedSection = () => {
       location: "Aurangabad, Maharashtra",
       description:
         "Buddhist rock-cut cave monuments with paintings and sculptures dating from the 2nd century BCE.",
-      imageSrc: "@/public/images/ajanta-caves-1.jpeg",
+      imageSrc: "/images/ajanta-caves-2.jpeg",
       slug: "ajanta-caves",
     },
     {
@@ -84,7 +85,7 @@ const SuggestedSection = () => {
       location: "Aurangabad, Maharashtra",
       description:
         "Remarkable cave temples featuring Buddhist, Hindu, and Jain monuments carved from a single rock face.",
-      imageSrc: "/images/ellora_caves.jpg",
+      imageSrc: "/images/ellora-caves-1.jpeg",
       slug: "ellora-caves",
     },
     {
@@ -92,7 +93,7 @@ const SuggestedSection = () => {
       location: "Jaipur, Rajasthan",
       description:
         "The 'Palace of Winds' with its unique honeycomb facade featuring 953 small windows.",
-      imageSrc: "/images/hawa_mahal.jpg",
+      imageSrc: "/images/hawa-mahal-3.jpeg",
       slug: "hawa-mahal",
     },
     {
@@ -100,7 +101,7 @@ const SuggestedSection = () => {
       location: "Mumbai, Maharashtra",
       description:
         "Iconic monument built to commemorate the visit of King George V and Queen Mary to Mumbai.",
-      imageSrc: "/images/gateway_of_india.jpg",
+      imageSrc: "/images/gateway-of-india-2.jpeg",
       slug: "gateway-of-india",
     },
     {
@@ -108,7 +109,7 @@ const SuggestedSection = () => {
       location: "Madhya Pradesh",
       description:
         "Temple complexes renowned for their nagara-style architecture and intricate sculptures.",
-      imageSrc: "/images/khajuraho.jpg",
+      imageSrc: "/images/khajuraho-2.jpeg",
       slug: "khajuraho",
     },
     {
@@ -116,7 +117,7 @@ const SuggestedSection = () => {
       location: "Puri, Odisha",
       description:
         "Massive temple designed as the chariot of the Sun God with elaborately carved stone wheels.",
-      imageSrc: "/images/konark_sun_temple.jpg",
+      imageSrc: "/images/sun-temple-konark-2.jpeg",
       slug: "sun-temple-konark",
     },
   ];
@@ -150,7 +151,7 @@ const TrendingSection = () => {
       location: "Hyderabad, Telangana",
       description:
         "Iconic landmark with four grand arches and minarets built in 1591 CE.",
-      imageSrc: "/images/charminar.jpg",
+      imageSrc: "/images/charminar-2.jpeg",
       slug: "charminar",
     },
     {
@@ -158,7 +159,7 @@ const TrendingSection = () => {
       location: "Amritsar, Punjab",
       description:
         "Most sacred Sikh gurdwara with the spectacular Harmandir Sahib floating on a sacred pool.",
-      imageSrc: "/images/golden_temple.jpg",
+      imageSrc: "/images/golden-temple-2.jpeg",
       slug: "golden-temple",
     },
     {
@@ -166,7 +167,7 @@ const TrendingSection = () => {
       location: "New Delhi",
       description:
         "Architectural marvel shaped like a lotus flower, welcoming all faiths for meditation.",
-      imageSrc: "/images/lotus_temple.jpg",
+      imageSrc: "/images/lotus-temple-4.jpeg",
       slug: "lotus-temple",
     },
     {
@@ -174,7 +175,7 @@ const TrendingSection = () => {
       location: "Mysore, Karnataka",
       description:
         "Indo-Saracenic masterpiece featuring stained glass, carved wooden doors, and mosaic floors.",
-      imageSrc: "/images/mysore_palace.jpg",
+      imageSrc: "/images/mysore-palace-1.jpg",
       slug: "mysore-palace",
     },
     {
@@ -182,7 +183,7 @@ const TrendingSection = () => {
       location: "New Delhi",
       description:
         "World's tallest brick minaret, adorned with intricate carvings and verses from the Quran.",
-      imageSrc: "/images/qutub_minar.jpg",
+      imageSrc: "/images/qutub-minar-2.jpg",
       slug: "qutub-minar",
     },
     {
@@ -190,7 +191,7 @@ const TrendingSection = () => {
       location: "Kolkata, West Bengal",
       description:
         "Magnificent white marble monument blending British and Mughal elements.",
-      imageSrc: "/images/victoria_memorial.jpg",
+      imageSrc: "/images/victoria-memorial-2.jpg",
       slug: "victoria-memorial",
     },
   ];
