@@ -55,7 +55,7 @@ export default function SuggestedSection({
               <p className="text-amber-700 mb-2">{item.location}</p>
               <p className="text-amber-700 mb-4">{item.description}</p>
               <Link
-                href={`/place/${item.slug}`}
+                href={`/places/${item.slug}`}
                 className="text-amber-600 hover:text-amber-800 font-medium"
               >
                 Discover &rarr;
