@@ -32,9 +32,9 @@ async def ask(request: AskRequest):
 
         # Add current user input
         if chat_log != []:
-            messages.append({"role": "user", "content": f"{prompt} Use the following for context: Previous prompt={chat_log[0]["prompt"]} Your response to the previous prompt={chat_log[0]["response"]} in language={chat_log[0]["language"]}"})
+            messages.append({"role": "user", "content": f"{prompt} Use the following for context: Previous prompt={chat_log[0]["prompt"]} Your response to the previous prompt={chat_log[0]["response"]} in language={chat_log[0]["language"]} in detail and in a way that is easy to understand"})
         else:
-            messages.append({"role": "user", "content": f"{prompt}, answer this in {language} language"})
+            messages.append({"role": "user", "content": f"{prompt}, answer this in {language} language in detail and in a way that is easy to understand"})
 
         # 🎯 Call OpenAI with full context
         response = openai.chat.completions.create(

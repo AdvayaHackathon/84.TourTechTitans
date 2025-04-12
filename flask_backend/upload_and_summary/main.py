@@ -1,4 +1,4 @@
-from fastapi import FastAPI, UploadFile, Form
+from fastapi import FastAPI, UploadFile, Form, Body
 from fastapi.responses import JSONResponse, FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 import os
@@ -8,6 +8,7 @@ from landmark_detection import predict_landmark_custom_model
 from summary_generator import get_openai_summary, generate_audio_summary
 from places import find_nearby_places
 from map_generator import generate_custom_leaflet_map_from_api_output
+from ask import router as ask_router  # Import the router from ask.py
 
 app = FastAPI()
 
@@ -20,6 +21,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Include the router from ask.py
 app.include_router(ask_router)
 
 UPLOAD_FOLDER = "uploads"
