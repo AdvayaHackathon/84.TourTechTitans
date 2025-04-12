@@ -16,7 +16,7 @@ from upload_and_summary.landmark_detection import (
 )
 from upload_and_summary.summary_generator import get_openai_summary, generate_audio_summary
 from upload_and_summary.places import find_nearby_places
-from upload_and_summary.map_generator import generate_leaflet_map_from_api_output
+from upload_and_summary.map_generator import generate_custom_leaflet_map_from_api_output
 
 UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -84,7 +84,7 @@ def create_app():
         lat = float(request.args.get('lat'))
         lng = float(request.args.get('lng'))
         results = find_nearby_places(lat, lng)
-        map_ = generate_leaflet_map_from_api_output(results)
+        map_ = generate_custom_leaflet_map_from_api_output(results)
         map_path = f"{UPLOAD_FOLDER}/leaflet_map.html"
         map_.save(map_path)
         return send_file(map_path)
